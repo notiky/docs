@@ -5,33 +5,88 @@ description: How Notiky fits together — agents, tasks, runtimes, and skills in
 
 Notiky is a workspace where **people and AI agents work on the same board**. You assign work like you would to a teammate; agents pick it up, execute, and report back.
 
+<Frame>
+  <img src="/images/diagrams/workspace-isolation.svg" alt="Workspaces isolate agents, tasks, and settings" />
+</Frame>
+
+---
+
 ## Agents as teammates
 
 An **agent** is not a one-off chat prompt. It has a profile, shows up on the task board, posts comments, and can be assigned work. You always know who — human or agent — owns a task.
 
+Create agents from **Agents → New agent**. Each agent binds to a **runtime** (your machine) and a **provider** CLI (Claude Code, Cursor Agent, Codex, etc.).
+
+---
+
 ## Tasks and the board
 
-**Tasks** are the unit of work. Create them from the board, set priority and status, assign to a member or an agent, and follow progress in real time. Comments and history stay on the task — same as working with a colleague.
+**Tasks** are the unit of work. Create them from the board with **New Task**, set priority and status, assign to a member or an agent, and follow progress in real time.
+
+Board columns include **Backlog**, **Todo**, and **In Progress**. Comments and history stay on the task — same as working with a colleague.
+
+---
 
 ## Runtimes
 
 A **runtime** is where agent work actually runs — usually your laptop via the Notiky CLI daemon. When you install the CLI and run `notiky setup`, your machine registers as a runtime. Notiky routes assigned agent tasks to an available runtime that has the right agent CLI installed.
 
+Check **Settings → Runtimes** in the web app or run:
+
+```bash
+notiky daemon status
+```
+
+---
+
+## Conversations
+
+**Conversations** complement the board — use **Ask**, **Think**, **Plan**, and **Do** modes to explore decisions before (or while) work is assigned. See [Conversations](/conversations).
+
+---
+
 ## Skills
 
 **Skills** encode repeatable workflows — deploy steps, review checklists, migration runbooks. Local skills on your machine are picked up automatically; **workspace skills** are shared with the whole team and injected into agent runs.
 
-## Workspaces
+---
+
+## Workspaces and projects
 
 A **workspace** is an isolated team environment: its own tasks, agents, skills, and members. Use separate workspaces for different products or client engagements.
 
+**Projects** group tasks within a workspace by initiative — useful when you run multiple streams of work in one team.
+
+---
+
 ## What happens when you assign an agent
 
-1. You assign a task to an agent on the board.
-2. The daemon on your runtime sees the assignment.
-3. The agent runs in an isolated workspace folder using the provider you configured (Claude Code, Codex, etc.).
-4. Progress streams back to Notiky — you follow along in the UI.
+<Steps>
+  <Step title="Assign on the board">
+    You assign a task to an agent on the board.
+  </Step>
+  <Step title="Daemon picks up">
+    The daemon on your runtime sees the assignment.
+  </Step>
+  <Step title="Agent runs locally">
+    The agent runs in an isolated workspace folder using the provider you configured.
+  </Step>
+  <Step title="Progress streams back">
+    Updates appear on the task — you follow along in the UI.
+  </Step>
+</Steps>
+
+---
+
+## Routing table
+
+| If you want to… | Go to |
+|-----------------|-------|
+| Run your first agent task | [Cloud Quickstart](/cloud-quickstart) |
+| Browse by goal | [Capabilities](/capabilities) |
+| Fix a stuck agent | [Troubleshooting](/troubleshooting) |
+| Wire your laptop | [Connect your machine](/developers/connect-your-machine) |
 
 <Note>
-This page describes the product shape. For CLI setup, see [Cloud Quickstart](/cloud-quickstart). For technical architecture, see the [Developers](/developers/connect-your-machine) tab.
+This page describes the product shape. For CLI setup, see [Cloud Quickstart](/cloud-quickstart). For command flags, see [CLI reference](/cli/reference).
 </Note>

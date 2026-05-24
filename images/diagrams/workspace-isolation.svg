@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" fill="none">
+  <rect width="720" height="200" rx="12" fill="#0A0D12"/>
+  <text x="360" y="28" text-anchor="middle" fill="#FAF6E6" font-family="Inter,sans-serif" font-size="13" font-weight="600">Each workspace is isolated</text>
+  <rect x="40" y="50" width="200" height="120" rx="10" stroke="#10604D" stroke-width="2"/>
+  <text x="140" y="78" text-anchor="middle" fill="#EBBE38" font-size="12" font-weight="600">Workspace A</text>
+  <text x="140" y="100" text-anchor="middle" fill="#FAF6E6" font-size="11" opacity="0.8">Agents · Tasks · Skills</text>
+  <rect x="260" y="50" width="200" height="120" rx="10" stroke="#10604D" stroke-width="2"/>
+  <text x="360" y="78" text-anchor="middle" fill="#EBBE38" font-size="12" font-weight="600">Workspace B</text>
+  <text x="360" y="100" text-anchor="middle" fill="#FAF6E6" font-size="11" opacity="0.8">Agents · Tasks · Skills</text>
+  <rect x="480" y="50" width="200" height="120" rx="10" stroke="#10604D" stroke-width="2"/>
+  <text x="580" y="78" text-anchor="middle" fill="#EBBE38" font-size="12" font-weight="600">Workspace C</text>
+  <text x="580" y="100" text-anchor="middle" fill="#FAF6E6" font-size="11" opacity="0.8">Agents · Tasks · Skills</text>
+</svg>

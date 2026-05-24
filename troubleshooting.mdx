@@ -1,0 +1,98 @@
+---
+title: Troubleshooting
+description: Plain-language fixes for daemon, runtime, and agent issues.
+---
+
+Start here when something feels stuck. Most issues are connection or runtime related — not “the agent is broken.”
+
+<CardGroup cols={2}>
+  <Card title="Cloud Quickstart" icon="rocket" href="/cloud-quickstart">
+    Re-run setup from scratch.
+  </Card>
+  <Card title="Connect your machine" icon="laptop" href="/developers/connect-your-machine">
+    CLI and daemon checklist.
+  </Card>
+  <Card title="CLI reference" icon="terminal" href="/cli/reference">
+    Command details for technical co-founders.
+  </Card>
+</CardGroup>
+
+---
+
+<AccordionGroup>
+  <Accordion title="Agent not picking up work">
+    **Usually means:** the daemon is not running, or your machine is not visible as a runtime.
+
+    1. Open **Settings → Runtimes** in the web app — your machine should show as online.
+    2. In a terminal:
+
+    ```bash
+    notiky daemon status
+    ```
+
+    3. If stopped, run `notiky setup` again or `notiky daemon start`.
+
+    4. Confirm the task is assigned to an **agent** (not only unassigned on the board).
+  </Accordion>
+
+  <Accordion title="Runtime not showing in the web app">
+    1. Check you are logged in: `notiky auth status`
+    2. Start the daemon: `notiky daemon start`
+    3. Wait ~15 seconds for heartbeat, then refresh **Settings → Runtimes**
+    4. Firewall: daemon must reach Notiky Cloud (or your self-hosted URL)
+  </Accordion>
+
+  <Accordion title="Agent CLI not found">
+    Notiky detects agent CLIs on your PATH. Install at least one provider (e.g. Claude Code), then:
+
+    ```bash
+    notiky daemon status --output json
+    ```
+
+    Override paths with env vars — see [CLI reference](/cli/reference) (`NOTIKY_CLAUDE_PATH`, `NOTIKY_CURSOR_PATH`, etc.).
+  </Accordion>
+
+  <Accordion title="Task stuck in queued or in progress">
+    - Check `notiky daemon logs -f` for errors
+    - Long tasks may run up to the default **2h** timeout
+    - Restart the daemon: `notiky daemon restart`
+    - Re-assign the task after fixing the underlying error
+  </Accordion>
+
+  <Accordion title="Wrong workspace">
+    The daemon only picks up tasks for workspaces your account belongs to.
+
+    ```bash
+    notiky workspace list
+    notiky config set workspace_id <id>
+    ```
+  </Accordion>
+
+  <Accordion title="Login or auth errors">
+    ```bash
+    notiky auth logout
+    notiky login
+    notiky setup
+    ```
+  </Accordion>
+
+  <Accordion title="Install command failed">
+    Use the official installer:
+
+    ```bash
+    curl -fsSL https://get.notiky.com | bash
+    ```
+
+    Or see [CLI installation](/cli/installation) for Homebrew and manual builds.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Still stuck?
+
+Email [support@notiky.com](mailto:support@notiky.com) with:
+
+- OS and Notiky version (`notiky version`)
+- Output of `notiky daemon status --output json` (redact tokens)
+- What you expected vs what happened

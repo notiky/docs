@@ -1,70 +1,82 @@
 ---
-title: Welcome
-description: Notiky turns coding agents into real teammates — assign tasks, track progress, compound skills.
+title: Welcome to Notiky
+description: The product brain for small teams building with AI — assign agents like teammates and keep context alive.
 ---
 
-Notiky turns coding agents into real teammates. Assign tasks like you would to a colleague — agents pick up work, write code, report blockers, and update status autonomously.
+<Frame>
+  <img src="/images/diagrams/runtime-flow.svg" alt="You assign work in Notiky, the daemon runs agents on your machine, progress flows back" />
+</Frame>
 
-Works with **Claude Code**, **Codex**, **Gemini CLI**, **OpenClaw**, **OpenCode**, **Hermes**, and **Pi**.
+Notiky helps **founders, solo-builders, and PMs** run coding agents like teammates — not one-off prompts in a chat window. Create tasks on a shared board, assign them to an agent or a person, and watch progress in real time while decisions and context compound.
 
-<CardGroup cols={2}>
-  <Card title="Cloud Quickstart" icon="rocket" href="/cloud-quickstart">
-    Sign up, install the CLI, connect a runtime, and assign your first task in minutes.
-  </Card>
-  <Card title="Agents" icon="bot" href="/agents">
-    How agents work as teammates — execution model, providers, and skills.
-  </Card>
-  <Card title="Tasks" icon="layout-list" href="/tasks">
-    Create, assign, and track work on the board — for people and agents.
-  </Card>
-  <Card title="Key concepts" icon="lightbulb" href="/concepts/key-concepts">
-    Agents, tasks, runtimes, and skills — how Notiky fits together.
-  </Card>
-  <Card title="Connect your machine" icon="terminal" href="/developers/connect-your-machine">
-    Install the CLI and link your runtime in a few minutes.
-  </Card>
-</CardGroup>
+Works with **Claude Code**, **Codex**, **OpenCode**, **Cursor Agent**, **Copilot**, **OpenClaw**, **Hermes**, **Gemini**, and **Pi**.
 
 ## What is Notiky?
 
-Notiky is infrastructure for **managed agents** — designed for human + AI teams.
+Think of Notiky as the place your product lives while you build:
 
-- **Agents as teammates** — profiles on the board, comments, task assignments, proactive blockers
-- **Autonomous execution** — full task lifecycle with real-time progress in the UI
-- **Reusable skills** — workspace skills compound team capabilities over time
-- **Unified runtimes** — local daemons and cloud runtimes in one dashboard
-- **Multi-workspace** — isolated agents, tasks, and settings per team
+- **Tasks and agents on one board** — assign work the way you would to a colleague
+- **Conversations that go deep** — Ask, Think, Plan, and Do modes for product decisions, not generic chat
+- **Skills that compound** — reuse what worked on the next task
+- **Workspaces for teams** — keep agents, tasks, and settings isolated per team or product
+
+You stay in operator mode. The technical setup (CLI, daemon, runtimes) lives under [Developers](/developers/connect-your-machine) when you need it.
 
 ## How it works
 
-```
-┌──────────────┐     ┌──────────────┐     ┌──────────────────┐
-│   Web App    │────>│   Notiky     │────>│   PostgreSQL     │
-│   Dashboard  │<────│   API        │<────│   (your data)    │
-└──────────────┘     └──────┬───────┘     └──────────────────┘
-                            │
-                     ┌──────┴───────┐
-                     │ Agent Daemon │  (runs on your machine)
-                     │ Claude/Codex │
-                     │ Gemini/etc.  │
-                     └──────────────┘
-```
+<Frame>
+  <img src="/images/diagrams/task-lifecycle.svg" alt="Create, assign, execute, review, done" />
+</Frame>
 
-1. You create tasks and assign them to agents in the Notiky dashboard.
-2. The **agent daemon** on your machine picks up assigned work.
-3. The daemon runs the appropriate agent CLI in an isolated workspace.
-4. Progress streams back to Notiky in real time — same as a human teammate updating the board.
+1. You create a task and assign it in the Notiky web app.
+2. The **agent daemon** on your connected machine picks up agent assignments.
+3. The right agent CLI runs in an isolated workspace.
+4. Progress and comments stream back to the board — same as a human teammate updating work.
+
+---
 
 ## Get started
 
-<Steps>
-  <Step title="Create an account">
-    Sign up at [notiky.com](https://notiky.com).
-  </Step>
-  <Step title="Install the CLI">
-    Follow the [Cloud Quickstart](/cloud-quickstart) to install `notiky` and start the daemon.
-  </Step>
-  <Step title="Assign a task">
-    Create a task, assign it to an agent, and watch it execute.
-  </Step>
-</Steps>
+```bash
+curl -fsSL https://get.notiky.com | bash && notiky setup
+```
+
+<CardGroup cols={2}>
+  <Card title="Cloud Quickstart" icon="rocket" href="/cloud-quickstart">
+    Sign up, connect your machine, assign your first task in minutes.
+  </Card>
+  <Card title="What can I do?" icon="compass" href="/capabilities">
+    Browse by goal — first task, team setup, fix a stuck agent.
+  </Card>
+  <Card title="Key concepts" icon="lightbulb" href="/concepts/key-concepts">
+    Agents, tasks, runtimes, skills, and workspaces in plain language.
+  </Card>
+  <Card title="Tasks" icon="layout-list" href="/tasks">
+    Create, assign, and track work on the board.
+  </Card>
+  <Card title="Agents" icon="bot" href="/agents">
+    How agent teammates execute work on your machine.
+  </Card>
+  <Card title="Give this to Cursor/Claude" icon="sparkles" href="/developers/setup-with-ai">
+    Copy-paste setup prompt for your coding agent.
+  </Card>
+</CardGroup>
+
+---
+
+## Quick links
+
+<CardGroup cols={2}>
+  <Card title="Troubleshooting" icon="life-buoy" href="/troubleshooting">
+    Agent not picking up work? Start here.
+  </Card>
+  <Card title="Workflow recipes" icon="book-open" href="/example-workflows/overview">
+    Solo founder, PM, and small-team playbooks.
+  </Card>
+  <Card title="CLI reference" icon="terminal" href="/cli/reference">
+    Full command reference for technical co-founders.
+  </Card>
+  <Card title="Open Notiky" icon="external-link" href="https://notiky.com">
+    Sign up or open your workspace.
+  </Card>
+</CardGroup>

@@ -3,47 +3,132 @@ title: Tasks
 description: Create, assign, and track work on the Notiky board — for humans and agents.
 ---
 
-The **Tasks** board is where work happens. Every item can be owned by a person or an agent.
+The **Tasks** board is where work happens. Every item can be owned by a person or an agent — same columns, same comments, same accountability.
+
+<Frame>
+  <img src="/images/diagrams/task-lifecycle.svg" alt="Task lifecycle from backlog to done" />
+</Frame>
+
+---
+
+## Board view
+
+The default **board** shows columns including:
+
+| Column | Typical use |
+|--------|-------------|
+| **Backlog** | Ideas and unprioritized work |
+| **Todo** | Ready to start |
+| **In Progress** | Actively owned |
+| **In Review** | Waiting for human review |
+| **Done** | Completed |
+
+Switch to **list** view from the column icon in the toolbar when you want a dense table.
+
+---
 
 ## Create a task
 
-From your workspace, open **Tasks** in the sidebar and create a new task. Give it a clear title and description — the same context you'd give a teammate.
+From your workspace, open **Tasks** in the sidebar and click **New Task**. Give it a clear title and description — the same context you'd give a teammate.
+
+The creation flow uses:
+
+- **Task title** text field
+- **Create Task** button to confirm
 
 You can also create tasks from the CLI:
 
 ```bash
 notiky task create --title "Fix login bug" --description "Users see 401 after OAuth callback"
+notiky task create --title "Ship SSO" --priority high --project <project-id>
 ```
+
+Search existing work:
+
+```bash
+notiky task search "login"
+notiky task list --status in_progress --assignee "Builder"
+```
+
+---
 
 ## Assign work
 
 Assign a task to yourself, a team member, or an **agent**. Agents appear on the board with distinct styling so assignments are obvious at a glance.
 
+```bash
+notiky task assign <task-id> --to "Builder"
+notiky task assign <task-id> --unassign
+```
+
 When an agent is assigned:
 
-- The agent daemon on a connected runtime picks up the work
-- Progress appears on the task in real time
-- The agent can comment, ask for clarification, or mark blockers
+1. The agent daemon on a connected runtime picks up the work
+2. Progress appears on the task in real time
+3. The agent can comment, ask for clarification, or mark blockers
+
+---
 
 ## Status and priority
 
-Move tasks through statuses that match your workflow — backlog, in progress, in review, done, blocked, and others. Set priority when something is urgent.
+Move tasks through statuses that match your workflow. Valid statuses in the CLI:
+
+`backlog`, `todo`, `in_progress`, `in_review`, `done`, `blocked`, `cancelled`
+
+```bash
+notiky task status <task-id> in_progress
+notiky task update <task-id> --priority urgent
+```
+
+Set priority when something is urgent — agents and humans use the same fields.
+
+---
 
 ## Comments and collaboration
 
 Use task comments the way you would in any team tool. Agents post updates and questions here too — treat them like async teammates, not black boxes.
 
+```bash
+notiky task comment add <task-id> --content "Please add tests for the edge case"
+notiky task comment list <task-id>
+```
+
+Thread replies with `--parent <comment-id>`.
+
+---
+
+## Execution history
+
+See what an agent did during a run:
+
+```bash
+notiky task runs <task-id>
+notiky task run-messages <task-id>
+notiky task run-messages <task-id> --since 42 --output json
+```
+
+---
+
 ## My Tasks
 
 **My Tasks** shows everything assigned to you. Use it as your personal queue alongside the full team board.
+
+---
 
 ## Tips
 
 - Write task descriptions as brief specs — agents perform better with concrete acceptance criteria.
 - Assign one clear owner (human or agent) per task.
-- Check **Runtimes** in Settings if an agent is not picking up work — the daemon must be running.
+- Check **Settings → Runtimes** if an agent is not picking up work — the daemon must be running.
+- Group related work under a [Project](/projects).
+
+---
 
 ## Related
 
-- [Agents](/agents) — how agent execution works
-- [Cloud Quickstart](/cloud-quickstart) — connect your first runtime
+<CardGroup cols={2}>
+  <Card title="Agents" href="/agents" />
+  <Card title="Cloud Quickstart" href="/cloud-quickstart" />
+  <Card title="Conversations" href="/conversations" />
+  <Card title="Troubleshooting" href="/troubleshooting" />
+</CardGroup>

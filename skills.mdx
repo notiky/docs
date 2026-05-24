@@ -3,7 +3,13 @@ title: Skills
 description: Reusable skills that compound your team's agent capabilities.
 ---
 
-Skills let agents reuse proven workflows — deployments, migrations, code reviews, and team-specific patterns.
+Skills let agents reuse proven workflows — deployments, migrations, code reviews, and team-specific patterns. Think of them as playbooks your agents already know.
+
+<Frame>
+  <img src="/images/diagrams/task-lifecycle.svg" alt="Skills accelerate repeat task execution" />
+</Frame>
+
+---
 
 ## Two layers
 
@@ -11,9 +17,11 @@ Skills let agents reuse proven workflows — deployments, migrations, code revie
 
 Skills already installed on your machine are discovered automatically:
 
-- Claude Code: `.claude/skills/`
-- OpenCode: `.config/opencode/skills/`
-- Similar paths for other providers
+| Provider | Typical path |
+|----------|--------------|
+| Claude Code | `.claude/skills/` |
+| OpenCode | `.config/opencode/skills/` |
+| Others | Provider-specific skill directories on PATH |
 
 You do **not** need to upload these to Notiky. The daemon passes them through to agent runs.
 
@@ -28,15 +36,37 @@ Use workspace skills for:
 - Code review checklists
 - Internal conventions and patterns
 
+---
+
 ## Why skills matter
 
 Every solved problem can become a reusable skill. Your skill library compounds over time — local skills give individual agents capabilities; workspace skills align the entire team.
 
+<Steps>
+  <Step title="Pick one high-frequency workflow">
+    Example: deploy to staging, or run the release checklist.
+  </Step>
+  <Step title="Capture it as a workspace skill">
+    Use the Skills page to document steps and constraints.
+  </Step>
+  <Step title="Assign a task that references it">
+    Write the task description so the agent knows to apply the skill.
+  </Step>
+  <Step title="Iterate from output">
+    Refine the skill when the agent misses an edge case.
+  </Step>
+</Steps>
+
 <Tip>
-Start with one high-frequency workflow (e.g. "deploy to staging") as a workspace skill. Assign a task that uses it and iterate from the agent's output.
+Start with one workflow your team runs weekly. Skills pay off when the same agent task repeats.
 </Tip>
+
+---
 
 ## Related
 
-- [Agents](/agents) — how agents execute tasks
-- [Workspaces](/workspaces) — workspace-level isolation
+<CardGroup cols={2}>
+  <Card title="Agents" href="/agents" />
+  <Card title="Workspaces" href="/workspaces" />
+  <Card title="Tasks" href="/tasks" />
+</CardGroup>

@@ -1,0 +1,44 @@
+---
+title: Projects
+description: Group tasks and context by product initiative or stream of work.
+---
+
+**Projects** help teams and solo-builders organize work beyond a single flat board — one initiative, one place to see related tasks and context.
+
+<Frame>
+  <img src="/images/diagrams/task-lifecycle.svg" alt="Projects group tasks through the lifecycle" />
+</Frame>
+
+---
+
+## When to use projects
+
+- You run **multiple products** in one workspace
+- You want agents and humans scoped to one initiative
+- You report progress per stream (“mobile app”, “API migration”, “launch week”)
+
+## Create and manage
+
+From the workspace **Projects** view:
+
+1. Create a project with a clear name and short description
+2. Associate new tasks with that project when creating work
+3. Filter the board or list by project to focus the team
+
+Technical co-founders can also use the CLI:
+
+```bash
+notiky project list
+notiky project create --name "Launch week" --description "May release"
+notiky project status <id> active
+```
+
+---
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Tasks" href="/tasks" />
+  <Card title="Workspaces" href="/workspaces" />
+  <Card title="CLI reference" href="/cli/reference" />
+</CardGroup>

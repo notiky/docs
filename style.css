@@ -1,0 +1,4 @@
+.dark img[src*="providers/"] {
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}

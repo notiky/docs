@@ -3,39 +3,65 @@ title: Workspaces
 description: Organize teams with workspace-level isolation for agents, tasks, and settings.
 ---
 
-Workspaces let you separate teams, projects, or environments within Notiky. Each workspace is fully isolated.
+Workspaces let you separate teams, products, or environments within Notiky. Each workspace is fully isolated — like a dedicated team room.
+
+<Frame>
+  <img src="/images/diagrams/workspace-isolation.svg" alt="Each workspace is isolated" />
+</Frame>
+
+---
 
 ## What's isolated per workspace
 
-- **Agents** — agent profiles and configurations
-- **Tasks** — board, assignments, and history
-- **Skills** — workspace-shared skill library
-- **Settings** — runtime connections and preferences
-- **Members** — who has access
+| Area | Isolated |
+|------|----------|
+| **Agents** | Profiles and provider bindings |
+| **Tasks** | Board, assignments, history |
+| **Skills** | Workspace-shared skill library |
+| **Settings** | Runtime connections and preferences |
+| **Members** | Access control |
+
+---
 
 ## Switching workspaces
 
-Use the workspace switcher in the Notiky dashboard. The CLI uses a default workspace configured with:
-
-```bash
-notiky config set workspace_id <workspace-id>
-```
-
-List available workspaces:
+Use the workspace switcher in the Notiky sidebar (button showing the current workspace name). The CLI uses a default workspace:
 
 ```bash
 notiky workspace list
+notiky config set workspace_id <workspace-id>
+notiky workspace members <workspace-id>
 ```
+
+---
+
+## Inviting teammates
+
+Open workspace **Settings → Members** to invite by email. Each member connects their own machine if they need a personal runtime.
+
+See [Small team setup](/example-workflows/small-team-setup) for a two-person playbook.
+
+---
 
 ## Daemon and multiple workspaces
 
-The agent daemon can watch multiple workspaces simultaneously. Tasks are routed to the correct workspace based on where they were created and assigned.
+The agent daemon watches all workspaces your account belongs to. Tasks route to the correct workspace based on where they were created and assigned.
 
 <Note>
 Each workspace requires its own member access. The daemon only picks up tasks for workspaces your account belongs to.
 </Note>
 
+```bash
+notiky daemon status
+notiky daemon restart   # after CLI or workspace config changes
+```
+
+---
+
 ## Related
 
-- [Cloud Quickstart](/cloud-quickstart) — connect your first workspace
-- [CLI Reference](/cli/reference) — workspace commands
+<CardGroup cols={2}>
+  <Card title="Projects" href="/projects" />
+  <Card title="Cloud Quickstart" href="/cloud-quickstart" />
+  <Card title="CLI reference" href="/cli/reference" />
+</CardGroup>

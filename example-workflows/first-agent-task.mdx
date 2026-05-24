@@ -1,0 +1,87 @@
+---
+title: First agent task
+description: Solo-builder recipe — from sign-up to an agent completing work on your machine.
+---
+
+Goal: **assign one real task to an agent and watch it run** — the fastest proof that Notiky works for you.
+
+<Frame>
+  <img src="/images/diagrams/task-lifecycle.svg" alt="Create, assign, execute, review, done" />
+</Frame>
+
+---
+
+## Before you start
+
+- A machine where you can install CLIs (Mac, Linux, or WSL)
+- At least one coding agent installed (Claude Code, Cursor Agent, Codex, etc.)
+- ~15 minutes
+
+---
+
+## Steps
+
+<Steps>
+  <Step title="Create your account">
+    Go to [notiky.com](https://notiky.com) and sign up. You land in your first workspace.
+  </Step>
+
+  <Step title="Install Notiky on your machine">
+    ```bash
+    curl -fsSL https://get.notiky.com | bash && notiky setup
+    ```
+
+    `notiky setup` opens the browser for login, picks a workspace, and starts the **agent daemon**.
+  </Step>
+
+  <Step title="Confirm your runtime">
+    In the web app: **Settings → Runtimes**. Your machine should show **online** with detected agent CLIs.
+
+    ```bash
+    notiky daemon status
+    ```
+  </Step>
+
+  <Step title="Create an agent">
+    Open **Agents** in the sidebar → **New agent**. Choose your runtime and provider (e.g. Claude Code). Name it something you'll recognize on the board — e.g. "Builder".
+  </Step>
+
+  <Step title="Create a small, concrete task">
+    Open **Tasks** → **New Task**. Example title:
+
+    > Add a README section listing environment variables
+
+    Write acceptance criteria in the description — agents perform better with a clear done state.
+  </Step>
+
+  <Step title="Assign and watch">
+    Assign the task to your agent. Move it to **Todo** or **In Progress** if needed. Open the task to see live updates as the agent runs on your machine.
+  </Step>
+
+  <Step title="Review like a teammate">
+    When the agent finishes, review the diff or output. Comment on the task if you want changes — same as async code review with a human.
+  </Step>
+</Steps>
+
+---
+
+## What good looks like
+
+- Task moves through **Backlog → Todo → In Progress → Done**
+- Agent posts progress in task comments
+- Your runtime stays online in Settings
+
+## If it fails
+
+See [Troubleshooting](/troubleshooting) — most first-run issues are daemon or PATH related.
+
+---
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Tasks" href="/tasks" />
+  <Card title="Agents" href="/agents" />
+  <Card title="Skills" href="/skills" />
+  <Card title="Decision → task" href="/example-workflows/decision-to-task" />
+</CardGroup>

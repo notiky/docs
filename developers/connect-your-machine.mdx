@@ -3,30 +3,42 @@ title: Connect your machine
 description: Link your computer to Notiky so agents can run work locally.
 ---
 
-Agents execute on **your machine** through the Notiky CLI and daemon. This page covers the minimum setup; power users can follow the full [CLI install guide](/cli/installation) or [GitHub CLI_INSTALL.md](https://github.com/notiky/notiky/blob/main/CLI_INSTALL.md).
+Agents execute on **your machine** through the Notiky CLI and daemon. This page covers the minimum setup; power users can follow the full [CLI install guide](/cli/installation).
+
+<Frame>
+  <img src="/images/diagrams/runtime-flow.svg" alt="CLI daemon connects machine to Notiky Cloud" />
+</Frame>
+
+---
 
 ## One-command setup
 
 ```bash
-brew install notiky/tap/notiky   # macOS/Linux, or see install guide
-notiky setup
+curl -fsSL https://get.notiky.com | bash && notiky setup
 ```
 
 `notiky setup` logs you into Notiky Cloud, discovers your workspaces, and starts the daemon.
+
+Prefer an agent-driven install? Use [Setup with AI](/developers/setup-with-ai).
+
+---
 
 ## Verify
 
 ```bash
 notiky daemon status
+notiky daemon status --output json
 ```
 
 You should see:
 
 - Status: **running**
-- At least one **agent** CLI detected (`claude`, `codex`, `gemini`, `opencode`, `openclaw`, `hermes`, or `pi`)
+- Agent CLIs detected among: `claude`, `codex`, `opencode`, `cursor-agent`, `copilot`, `openclaw`, `hermes`, `gemini`, `pi`
 - At least one **workspace** watched
 
 In the web app, open **Settings → Runtimes** — your machine should appear as active.
+
+---
 
 ## Install an agent provider
 
@@ -34,14 +46,17 @@ The daemon runs whatever coding agent CLIs you have installed. Install at least 
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
 - [Codex](https://github.com/openai/codex)
+- [Cursor Agent](https://cursor.com) (`cursor-agent` on PATH)
 - [Gemini CLI](https://github.com/google-gemini/gemini-cli)
-- OpenCode, OpenClaw, Hermes, or Pi on your PATH
+- OpenCode, Copilot, OpenClaw, Hermes, or Pi on your PATH
 
-Restart the daemon after installing a new CLI:
+After installing a new CLI:
 
 ```bash
-notiky daemon stop && notiky daemon start
+notiky daemon restart
 ```
+
+---
 
 ## Self-hosted
 
@@ -54,8 +69,13 @@ notiky login
 notiky daemon start
 ```
 
+---
+
 ## Full reference
 
-- [CLI installation](/cli/installation) — Homebrew, releases, build from source
-- [CLI reference](/cli/reference) — all commands
-- [Contributing on GitHub](https://github.com/notiky/notiky/blob/main/CONTRIBUTING.md) — run the product locally
+<CardGroup cols={2}>
+  <Card title="CLI installation" href="/cli/installation" />
+  <Card title="CLI reference" href="/cli/reference" />
+  <Card title="Troubleshooting" href="/troubleshooting" />
+  <Card title="Contributing on GitHub" href="https://github.com/notiky/notiky/blob/main/CONTRIBUTING.md" />
+</CardGroup>

@@ -1,0 +1,81 @@
+---
+title: Decision to task
+description: PM workflow — use Conversations to think, then assign an agent to ship.
+---
+
+Goal: **turn a product decision into assigned work** without losing context between chat and the board.
+
+<Frame>
+  <img src="/images/diagrams/runtime-flow.svg" alt="Conversation modes feed into tasks and agents" />
+</Frame>
+
+---
+
+## Scenario
+
+You're deciding whether to ship feature X this sprint. You want to:
+
+1. Explore tradeoffs with AI that pushes back (not yes-man chat)
+2. Break the decision into tasks with enough context
+3. Assign implementation to an agent on a connected runtime
+
+---
+
+## Steps
+
+<Steps>
+  <Step title="Open a conversation in Think mode">
+    From your workspace, open **Conversations**. Select **Think** in the mode pills (**Ask**, **Think**, **Plan**, **Do**).
+
+    Prompt example:
+
+    > We're considering shipping SSO for enterprise. What are the risks we haven't written down? Challenge our assumptions.
+  </Step>
+
+  <Step title="Capture the decision">
+    When you're aligned, switch to **Plan**. Ask Notiky to draft tasks with titles, descriptions, and suggested priority — still without mutating the board.
+  </Step>
+
+  <Step title="Create tasks on the board">
+    Switch to **Do** if you want the agent to create tasks directly, or copy the plan into **New Task** manually for more control.
+  </Step>
+
+  <Step title="Assign implementation">
+    Pick one task with clear acceptance criteria. Assign it to an [agent](/agents) that has access to your repo via a connected runtime.
+  </Step>
+
+  <Step title="Track with the team">
+    Use [Tasks](/tasks) board columns — **Backlog**, **Todo**, **In Progress** — so everyone sees status. Link back to the conversation in a task comment for audit trail.
+  </Step>
+</Steps>
+
+---
+
+## Mode cheat sheet
+
+| Mode | Use when |
+|------|----------|
+| Ask | Quick factual questions from workspace context |
+| Think | Exploring decisions — AI can argue back |
+| Plan | Drafting tasks without executing |
+| Do | Creating/updating tasks and artifacts |
+
+Full reference: [Conversations](/conversations).
+
+---
+
+## Tips for PMs
+
+- Keep one decision per conversation thread when possible.
+- Task descriptions should include **why**, not just **what** — agents use the same context humans do.
+- Use [Projects](/projects) if the work spans multiple tasks for one initiative.
+
+---
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Conversations" href="/conversations" />
+  <Card title="Tasks" href="/tasks" />
+  <Card title="First agent task" href="/example-workflows/first-agent-task" />
+</CardGroup>

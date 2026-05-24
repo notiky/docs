@@ -1,12 +1,17 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "name": "Notiky | Managed agents platform",
-  "description": "Turn coding agents into real teammates — guides for teams, reference for developers. Depth gradient: Getting Started → Using Notiky → For Teams → Developers → Changelog.",
+  "name": "Notiky Documentation",
+  "description": "Product guides for founders, solo-builders, and PMs — assign agents like teammates, track work on the board, go deeper when you need CLI and runtimes.",
+  "theme": "mint",
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#6366F1",
-    "light": "#818CF8",
-    "dark": "#4F46E5"
+    "primary": "#10604D",
+    "light": "#10604D",
+    "dark": "#10604D"
+  },
+  "background": {
+    "color": { "dark": "#0A0D12" },
+    "decoration": "gradient"
   },
   "fonts": {
     "heading": { "family": "Inter" },
@@ -34,14 +39,23 @@
   "contextual": {
     "options": ["copy", "view", "chatgpt", "claude"]
   },
+  "styling": {
+    "css": ["/style.css"]
+  },
   "navigation": {
     "tabs": [
       {
         "tab": "Getting Started",
         "groups": [
           {
-            "group": "Welcome",
-            "pages": ["welcome", "cloud-quickstart", "concepts/key-concepts"]
+            "group": "Start here",
+            "pages": [
+              "welcome",
+              "cloud-quickstart",
+              "capabilities",
+              "concepts/key-concepts",
+              "troubleshooting"
+            ]
           }
         ]
       },
@@ -50,7 +64,7 @@
         "groups": [
           {
             "group": "Day to day",
-            "pages": ["tasks", "agents", "skills"]
+            "pages": ["tasks", "agents", "conversations", "skills", "knowledge"]
           }
         ]
       },
@@ -59,7 +73,21 @@
         "groups": [
           {
             "group": "Workspace",
-            "pages": ["workspaces"]
+            "pages": ["workspaces", "projects"]
+          }
+        ]
+      },
+      {
+        "tab": "Workflows",
+        "groups": [
+          {
+            "group": "Recipes",
+            "pages": [
+              "example-workflows/overview",
+              "example-workflows/first-agent-task",
+              "example-workflows/decision-to-task",
+              "example-workflows/small-team-setup"
+            ]
           }
         ]
       },
@@ -67,8 +95,12 @@
         "tab": "Developers",
         "groups": [
           {
-            "group": "Connect",
-            "pages": ["developers/connect-your-machine", "cli/installation"]
+            "group": "Setup",
+            "pages": [
+              "developers/setup-with-ai",
+              "developers/connect-your-machine",
+              "cli/installation"
+            ]
           },
           {
             "group": "Reference",

@@ -3,6 +3,19 @@ title: CLI Reference
 description: Complete command reference for the Notiky CLI and agent daemon.
 ---
 
+Technical reference for co-founders and engineers. Operators can skip this tab until they need flags or automation.
+
+## Setup
+
+```bash
+notiky setup                    # Cloud: login + workspace + daemon
+notiky setup self-host ...      # Self-hosted profile (see below)
+notiky version
+notiky update
+```
+
+---
+
 ## Authentication
 
 ```bash
@@ -12,6 +25,8 @@ notiky auth status        # Current server, user, token validity
 notiky auth logout        # Remove stored token
 ```
 
+---
+
 ## Agent daemon
 
 The daemon detects AI CLIs on your machine, registers runtimes, and executes assigned tasks.
@@ -20,6 +35,7 @@ The daemon detects AI CLIs on your machine, registers runtimes, and executes ass
 notiky daemon start                  # Background (logs to ~/.notiky/daemon.log)
 notiky daemon start --foreground     # Foreground (debugging)
 notiky daemon stop
+notiky daemon restart
 notiky daemon status
 notiky daemon status --output json
 notiky daemon logs                   # Last 50 lines
@@ -29,16 +45,19 @@ notiky daemon logs -n 100            # Last 100 lines
 
 ### Supported agents
 
-| CLI | Command |
-|-----|---------|
-| Claude Code | `claude` |
-| Codex | `codex` |
-| Gemini CLI | `gemini` |
-| OpenCode | `opencode` |
-| OpenClaw | `openclaw` |
-| Hermes | `hermes` |
+| Provider | CLI | Path env | Model env |
+|----------|-----|----------|-----------|
+| Claude Code | `claude` | `NOTIKY_CLAUDE_PATH` | `NOTIKY_CLAUDE_MODEL` |
+| Codex | `codex` | `NOTIKY_CODEX_PATH` | `NOTIKY_CODEX_MODEL` |
+| OpenCode | `opencode` | `NOTIKY_OPENCODE_PATH` | `NOTIKY_OPENCODE_MODEL` |
+| Cursor Agent | `cursor-agent` | `NOTIKY_CURSOR_PATH` | `NOTIKY_CURSOR_MODEL` |
+| Copilot | `copilot` | `NOTIKY_COPILOT_PATH` | `NOTIKY_COPILOT_MODEL` |
+| OpenClaw | `openclaw` | `NOTIKY_OPENCLAW_PATH` | `NOTIKY_OPENCLAW_MODEL` |
+| Hermes | `hermes` | `NOTIKY_HERMES_PATH` | `NOTIKY_HERMES_MODEL` |
+| Gemini | `gemini` | `NOTIKY_GEMINI_PATH` | `NOTIKY_GEMINI_MODEL` |
+| Pi | `pi` | `NOTIKY_PI_PATH` | `NOTIKY_PI_MODEL` |
 
-### Configuration
+### Daemon configuration
 
 | Setting | Flag | Env variable | Default |
 |---------|------|--------------|---------|
@@ -47,8 +66,6 @@ notiky daemon logs -n 100            # Last 100 lines
 | Agent timeout | `--agent-timeout` | `NOTIKY_AGENT_TIMEOUT` | `2h` |
 | Max concurrent | `--max-concurrent-tasks` | `NOTIKY_DAEMON_MAX_CONCURRENT_TASKS` | `20` |
 | Workspaces root | — | `NOTIKY_WORKSPACES_ROOT` | `~/notiky_workspaces` |
-
-Agent path overrides: `NOTIKY_CLAUDE_PATH`, `NOTIKY_CODEX_PATH`, `NOTIKY_GEMINI_PATH`, `NOTIKY_OPENCODE_PATH`, `NOTIKY_OPENCLAW_PATH`, `NOTIKY_HERMES_PATH` (and corresponding `_MODEL` vars).
 
 ### Self-hosted server
 
@@ -76,6 +93,8 @@ notiky daemon start --profile staging
 notiky daemon start   # default profile
 ```
 
+---
+
 ## Workspaces
 
 ```bash
@@ -86,12 +105,16 @@ notiky workspace members <workspace-id>
 notiky config set workspace_id <workspace-id>
 ```
 
+---
+
 ## Tasks
 
 ```bash
 notiky task list
 notiky task list --status in_progress --priority urgent --assignee "Agent Name"
+notiky task list --project <project-id> --limit 50 --offset 0
 notiky task get <id>
+notiky task search <query>
 notiky task create --title "Fix login bug" --description "..." --priority high --assignee "Lambda"
 notiky task update <id> --title "New title" --priority urgent
 notiky task assign <id> --to "Lambda"
@@ -118,6 +141,26 @@ notiky task run-messages <task-id>
 notiky task run-messages <task-id> --since 42 --output json
 ```
 
+---
+
+## Projects
+
+```bash
+notiky project list
+notiky project create --name "Launch week" --description "May release"
+notiky project status <id> active
+```
+
+---
+
+## Agents
+
+```bash
+notiky agent list
+```
+
+---
+
 ## Configuration
 
 ```bash
@@ -127,14 +170,16 @@ notiky config set app_url https://app.example.com
 notiky config set workspace_id <workspace-id>
 ```
 
-## Other commands
-
-```bash
-notiky version
-notiky update
-notiky agent list
-```
+---
 
 ## Output formats
 
 Most list/status commands support `--output table` (default) or `--output json`.
+
+---
+
+## Related
+
+- [CLI installation](/cli/installation)
+- [Connect your machine](/developers/connect-your-machine)
+- [Setup with AI](/developers/setup-with-ai)

@@ -1,0 +1,95 @@
+---
+title: Small team setup
+description: Two humans, two machines, shared workspace — agents on each runtime.
+---
+
+Goal: **a co-founder and a PM (or second founder) share one workspace**, each with their own machine connected as a runtime.
+
+<Frame>
+  <img src="/images/diagrams/workspace-isolation.svg" alt="One workspace, multiple runtimes and members" />
+</Frame>
+
+---
+
+## Architecture
+
+| Person | Role | Machine |
+|--------|------|---------|
+| Alex | Technical co-founder | Runtime A — Claude Code + repo checkout |
+| Sam | PM / product | Runtime B — optional agent for docs/research tasks |
+| Both | Members | Same Notiky **workspace** |
+
+Agents and tasks live in the **shared board**. Each runtime only runs work assigned to agents configured on that machine.
+
+---
+
+## Steps
+
+<Steps>
+  <Step title="Create the workspace">
+    Alex signs up at [notiky.com](https://notiky.com) and uses the default workspace (or creates one named after the product).
+  </Step>
+
+  <Step title="Invite Sam">
+    Open workspace **Settings → Members** and invite Sam's email. Sam accepts and lands in the same workspace.
+  </Step>
+
+  <Step title="Connect Alex's machine">
+    ```bash
+    curl -fsSL https://get.notiky.com | bash && notiky setup
+    ```
+
+    Alex creates **New agent** on Runtime A — e.g. "Implementer" with Claude Code.
+  </Step>
+
+  <Step title="Connect Sam's machine (optional)">
+    Sam runs the same install on their laptop if they want a local agent (e.g. Cursor Agent for lighter tasks). Otherwise Sam assigns work to Alex's agents.
+  </Step>
+
+  <Step title="Agree on conventions">
+    - Human-owned tasks → assign to members
+    - Agent-owned tasks → assign to named agents
+    - Use [Projects](/projects) for each product stream
+    - Document repeat workflows as [workspace skills](/skills)
+  </Step>
+
+  <Step title="Run a joint dry run">
+    Sam creates a task with clear acceptance criteria. Alex assigns it to Implementer. Both watch progress on the board and comment async.
+  </Step>
+</Steps>
+
+---
+
+## CLI tips for two machines
+
+Each person logs in with their own account:
+
+```bash
+notiky auth status
+notiky workspace list
+notiky config set workspace_id <shared-workspace-id>
+```
+
+List agents visible to the workspace:
+
+```bash
+notiky agent list
+```
+
+---
+
+## Scaling beyond two
+
+- Add [workspaces](/workspaces) per client or product line
+- Keep one daemon per machine — use `notiky daemon restart` after CLI updates
+- See [Troubleshooting](/troubleshooting) if a runtime drops offline
+
+---
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Workspaces" href="/workspaces" />
+  <Card title="Agents" href="/agents" />
+  <Card title="Connect your machine" href="/developers/connect-your-machine" />
+</CardGroup>

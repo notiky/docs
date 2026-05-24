@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 280" fill="none">
+  <rect width="920" height="280" rx="16" fill="#0A0D12"/>
+  <text x="460" y="36" text-anchor="middle" fill="#FAF6E6" font-family="Inter,sans-serif" font-size="14" font-weight="600">How Notiky runs your agents</text>
+  <rect x="40" y="70" width="160" height="72" rx="10" stroke="#10604D" stroke-width="2" fill="#10604D22"/>
+  <text x="120" y="102" text-anchor="middle" fill="#FAF6E6" font-family="Inter,sans-serif" font-size="13" font-weight="600">You</text>
+  <text x="120" y="122" text-anchor="middle" fill="#FAF6E6" font-size="11" opacity="0.7">Web app</text>
+  <path d="M200 106h60" stroke="#EBBE38" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="260" y="70" width="160" height="72" rx="10" stroke="#10604D" stroke-width="2" fill="#10604D22"/>
+  <text x="340" y="102" text-anchor="middle" fill="#FAF6E6" font-family="Inter,sans-serif" font-size="13" font-weight="600">Notiky</text>
+  <text x="340" y="122" text-anchor="middle" fill="#FAF6E6" font-size="11" opacity="0.7">Tasks &amp; agents</text>
+  <path d="M420 106h60" stroke="#EBBE38" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="480" y="70" width="160" height="72" rx="10" stroke="#10604D" stroke-width="2" fill="#10604D22"/>
+  <text x="560" y="102" text-anchor="middle" fill="#FAF6E6" font-family="Inter,sans-serif" font-size="13" font-weight="600">Daemon</text>
+  <text x="560" y="122" text-anchor="middle" fill="#FAF6E6" font-size="11" opacity="0.7">Your machine</text>
+  <path d="M640 106h60" stroke="#EBBE38" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="700" y="70" width="180" height="72" rx="10" stroke="#10604D" stroke-width="2" fill="#10604D22"/>
+  <text x="790" y="102" text-anchor="middle" fill="#FAF6E6" font-family="Inter,sans-serif" font-size="13" font-weight="600">Agent CLI</text>
+  <text x="790" y="122" text-anchor="middle" fill="#FAF6E6" font-size="11" opacity="0.7">Claude, Cursor, &</text>
+  <text x="460" y="200" text-anchor="middle" fill="#FAF6E6" font-size="12" opacity="0.75">Assign on the board ’ daemon picks up ’ progress streams back</text>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#EBBE38"/></marker></defs>
+</svg>

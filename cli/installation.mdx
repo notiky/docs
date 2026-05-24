@@ -5,9 +5,16 @@ description: Install the Notiky CLI and start the agent daemon on your machine.
 
 The `notiky` CLI connects your machine to Notiky — authentication, workspace management, and the agent daemon.
 
+---
+
 ## Install
 
 <Tabs>
+  <Tab title="Recommended">
+    ```bash
+    curl -fsSL https://get.notiky.com | bash
+    ```
+  </Tab>
   <Tab title="Homebrew">
     ```bash
     brew install notiky/tap/notiky
@@ -39,6 +46,8 @@ The `notiky` CLI connects your machine to Notiky — authentication, workspace m
   </Tab>
 </Tabs>
 
+---
+
 ## Quick start
 
 ```bash
@@ -46,6 +55,8 @@ notiky setup
 ```
 
 Configures the CLI for Notiky Cloud, authenticates via browser, discovers workspaces, and starts the daemon.
+
+---
 
 ## Verify
 
@@ -56,14 +67,34 @@ notiky daemon status
 Confirm:
 
 1. Status is `running`
-2. At least one agent is listed (`claude`, `codex`, `gemini`, `opencode`, `openclaw`, `hermes`, or `pi`)
+2. At least one agent is listed — Claude Code, Codex, OpenCode, Cursor Agent, Copilot, OpenClaw, Hermes, Gemini, or Pi
 3. At least one workspace is being watched
 
 If the agents list is empty, install a supported provider CLI and restart:
 
 ```bash
-notiky daemon stop && notiky daemon start
+notiky daemon restart
 ```
+
+---
+
+## Supported providers
+
+| Provider | CLI |
+|----------|-----|
+| Claude Code | `claude` |
+| Codex | `codex` |
+| OpenCode | `opencode` |
+| Cursor Agent | `cursor-agent` |
+| Copilot | `copilot` |
+| OpenClaw | `openclaw` |
+| Hermes | `hermes` |
+| Gemini | `gemini` |
+| Pi | `pi` |
+
+Path overrides: see [CLI reference](/cli/reference).
+
+---
 
 ## Update
 
@@ -73,7 +104,12 @@ brew upgrade notiky/tap/notiky
 notiky update
 ```
 
+---
+
 ## Next
 
-- [CLI Reference](/cli/reference) — full command documentation
-- [Cloud Quickstart](/cloud-quickstart) — end-to-end setup guide
+<CardGroup cols={2}>
+  <Card title="CLI reference" href="/cli/reference" />
+  <Card title="Cloud Quickstart" href="/cloud-quickstart" />
+  <Card title="Setup with AI" href="/developers/setup-with-ai" />
+</CardGroup>
