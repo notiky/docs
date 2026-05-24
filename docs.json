@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "Notiky | Managed agents platform",
-  "description": "Turn coding agents into real teammates — guides for teams, reference for developers.",
+  "description": "Turn coding agents into real teammates — guides for teams, reference for developers. Depth gradient: Getting Started → Using Notiky → For Teams → Developers → Changelog.",
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#6366F1",

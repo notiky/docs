@@ -1,0 +1,10 @@
+{
+  "_comment": "Paste into docs.json navigation.tabs when RESEARCH-BLOG-PIPELINE gate opens. Do not enable before sanitization pass.",
+  "tab": "Research",
+  "groups": [
+    {
+      "group": "Pillars",
+      "pages": []
+    }
+  ]
+}

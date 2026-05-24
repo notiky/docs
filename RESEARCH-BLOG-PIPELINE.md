@@ -18,7 +18,7 @@ Pick one merged canonical folder before publishing.
 1. Author or update research in the internal canonical folder.
 2. **Sanitization pass** — strip: unreproducible metrics, customer names, internal strategy, data-room references, WU/ADR IDs.
 3. Copy sanitized version into `research/` in this public repo.
-4. Uncomment the Research tab in `docs.json`.
+4. Add pages to `research/` and paste the tab block from [`research-tab.future.json`](research-tab.future.json) into `docs.json` navigation.
 5. Mintlify preview → `check-public-docs.sh` → merge.
 
 ## Gate
