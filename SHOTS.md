@@ -1,57 +1,61 @@
-# Screenshot capture guide
+# Screenshot capture guide — Acme Product demo universe
 
-Real product screenshots — not stock art. Run after dev stack is up in `notiky-app/`.
+One seeded workspace (**Acme Product**) powers all docs media. Every PNG is scenario-specific — no shared heroes across unrelated pages.
 
-**Viewport:** 1440×900. Captures crop to the center `main` panel (no sidebar, no assistant rail, no cookie banner).
-
-**Dev server:** Use **`next dev --webpack --port 3031`** — Turbopack can panic on `/tasks`. Either `make dev` or run the Go server plus webpack separately.
-
-**Clean capture rules:**
-
-- Consent cookie in `e2e/global-setup.ts` (`notiky_analytics_consent=denied`) plus per-test dismiss
-- Close assistant rail via top-bar **Toggle conversation rail** (never on `/conversations/new`)
-- Seed demo data via `seedDocsDemoData()` — realistic tasks and workspace skills
-- Dialog shots: dialog content only (New agent, Settings → Runtimes)
-- Workspace switcher: dropdown menu only
-- Post-capture QA: each PNG ≥ 15 KB; no cookie banner in DOM
+**Dev server:** `make dev` or Go on 8082 + `next dev --webpack --port 3031`
 
 ```bash
-# Terminal 1 — if not already running
-cd notiky-app && make dev
-# or: Go server on 8082 + apps/web: pnpm exec next dev --webpack --port 3031
-
-# Terminal 2 (global setup runs via playwright.config.ts)
 cd notiky-app && pnpm exec playwright test e2e/docs-screenshots.spec.ts
 ```
 
-Output directory: `../docs/images/` (committed to `notiky/docs`).
+Output: `docs/images/guides/` and `docs/images/recipes/`
 
-| Filename | Route / action | Used in |
-|----------|----------------|---------|
-| `welcome-hero.png` | Tasks board (hero stand-in) | welcome |
-| `quickstart-runtimes.png` | Settings → Runtimes | cloud-quickstart |
-| `quickstart-new-agent.png` | Agents → New agent dialog | cloud-quickstart, agents, first-agent-task |
-| `tasks-board.png` | Tasks board (seeded) | tasks, cloud-quickstart, recipes |
-| `tasks-assign.png` | Task detail → Properties | tasks, bugfix-while-away, spec-review-loop |
-| `tasks-in-review.png` | Task detail (in progress) | spec-review-loop |
-| `agents-board.png` | Agents list | agents |
-| `skills-page.png` | Skills (seeded workspace skills) | skills |
-| `workspaces-switcher.png` | Workspace switcher | workspaces, onboard-teammate |
-| `conversations-modes.png` | Conversations/new mode pills | conversations, spec-review-loop |
-| `projects-page.png` | Projects | projects |
+## Demo seed (`seedDocsUniverse`)
 
-**Knowledge** uses [`images/diagrams/knowledge-context.svg`](images/diagrams/knowledge-context.svg) — not a PNG (E2E graph data is not demo-safe).
+| Entity | Value |
+|--------|--------|
+| User | Alex Chen (`alex@acme.dev`) |
+| Workspaces | Acme Product, Client Beta |
+| Runtime | Alex's MacBook (online) |
+| Agents | Builder, Researcher |
+| Projects | Q2 Launch, Mobile app |
+| Pending invite | sam@acme.dev |
 
-## Future: videos and GIFs
+Call `purgeDocsWorkspace()` before every capture run.
 
-Drop files under `images/media/` and swap the Frame `src`:
+## Guides (`images/guides/`)
 
-```mdx
-<Frame>
-  <img src="/images/media/tasks-board.gif" alt="..." />
-</Frame>
-```
+| File | Moment | MDX |
+|------|--------|-----|
+| `welcome-board.png` | Board with agent-assigned In Progress | welcome |
+| `quickstart-board.png` | Board after setup path | cloud-quickstart hero |
+| `quickstart-runtimes.png` | Settings → Runtimes online | cloud-quickstart, setup-with-ai |
+| `quickstart-new-agent.png` | New agent dialog | cloud-quickstart, agents steps |
+| `tasks-board.png` | Board with assignee chips | tasks hero |
+| `tasks-assign-agent.png` | Task detail, Builder assigned | tasks, recipe steps |
+| `agents-list.png` | Builder + Researcher listed | agents |
+| `conversations-modes.png` | Plan mode composer | conversations |
+| `conversations-think.png` | Think mode composer | conversations (optional) |
+| `skills-library.png` | Workspace skills list | skills |
+| `projects-list.png` | Q2 Launch + Mobile app | projects |
+| `workspaces-switcher.png` | Acme Product + Client Beta | workspaces |
+| `workspaces-members.png` | Members + pending invite | workspaces, team recipes |
+| `setup-with-ai-runtimes.png` | Runtimes confirmation | setup-with-ai |
 
-Priority clips: Conversations modes, Tasks assign flow, New agent dialog, Skills create/import.
+## Recipes (`images/recipes/`)
 
-Regenerate PNGs after UI changes that affect these routes.
+| File | Moment | MDX hero |
+|------|--------|----------|
+| `recipe-first-agent-assign.png` | README task → Builder | first-agent-task |
+| `recipe-bugfix-board.png` | Bug Todo + fix In Progress | bugfix-while-away |
+| `recipe-spec-in-review.png` | CSV spec In Progress | spec-review-loop |
+| `recipe-decision-plan.png` | Plan mode decision | decision-to-task |
+| `recipe-team-members.png` | Members invite | small-team-setup, onboard-teammate |
+
+## Diagrams (SVG)
+
+`images/diagrams/` — key-concepts, knowledge, runtime-flow, task-lifecycle
+
+## Future GIFs
+
+`images/media/` — swap `<Frame src>` when clips are ready.

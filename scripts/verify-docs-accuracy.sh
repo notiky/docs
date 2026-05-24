@@ -44,7 +44,6 @@ for cmd in "daemon restart" "task search" "setup"; do
   fi
 done
 
-# PNG assets listed in SHOTS.md must exist and meet minimum size
 png_min_bytes() {
   case "$1" in
     workspaces-switcher.png) echo 10000 ;;
@@ -52,24 +51,33 @@ png_min_bytes() {
     *) echo 15000 ;;
   esac
 }
+
+# All PNGs listed in SHOTS.md guides/recipes tables
 if [[ -f "$SHOTS" ]]; then
-  while IFS= read -r png; do
-    [[ -z "$png" ]] && continue
-    if [[ ! -f "images/$png" ]]; then
-      echo "verify-docs-accuracy: missing screenshot: images/$png"
+  while IFS= read -r rel; do
+    [[ -z "$rel" ]] && continue
+    if [[ ! -f "images/$rel" ]]; then
+      echo "verify-docs-accuracy: missing screenshot: images/$rel"
       FAIL=1
     elif command -v stat >/dev/null 2>&1; then
-      size=$(stat -f%z "images/$png" 2>/dev/null || stat -c%s "images/$png" 2>/dev/null || echo 0)
-      min=$(png_min_bytes "$png")
+      size=$(stat -f%z "images/$rel" 2>/dev/null || stat -c%s "images/$rel" 2>/dev/null || echo 0)
+      base=$(basename "$rel")
+      min=$(png_min_bytes "$base")
       if [[ "$size" -lt "$min" ]]; then
-        echo "verify-docs-accuracy: screenshot too small (${size} bytes, min ${min}): images/$png"
+        echo "verify-docs-accuracy: screenshot too small (${size} bytes, min ${min}): images/$rel"
         FAIL=1
       fi
     fi
-  done < <(grep -oE '`[a-z0-9-]+\.png`' "$SHOTS" | tr -d '`')
+  done < <(grep -oE '`guides/[a-z0-9-]+\.png`|`recipes/[a-z0-9-]+\.png`' "$SHOTS" | tr -d '`')
 fi
 
-# Operator guides must reference product media (PNG or diagram SVG)
+# No legacy flat PNG references in MDX
+if rg -q '/images/(tasks-board|welcome-hero|agents-board|tasks-assign|conversations-modes|skills-page|projects-page|workspaces-switcher|quickstart-runtimes|quickstart-new-agent|tasks-in-review)\.png' --glob '*.mdx' . 2>/dev/null; then
+  echo "verify-docs-accuracy: legacy flat PNG path still referenced in MDX"
+  FAIL=1
+fi
+
+# Operator guides must reference guides/, recipes/, or diagrams/
 OPERATOR_PAGES=(
   welcome.mdx
   cloud-quickstart.mdx
@@ -82,8 +90,18 @@ OPERATOR_PAGES=(
   projects.mdx
 )
 for page in "${OPERATOR_PAGES[@]}"; do
-  if ! rg -q '/images/(diagrams/)?[a-z0-9-]+\.(png|svg)' "$page" 2>/dev/null; then
+  if ! rg -q '/images/(guides/|recipes/|diagrams/)' "$page" 2>/dev/null; then
     echo "verify-docs-accuracy: $page missing image reference"
+    FAIL=1
+  fi
+done
+
+# Recipe heroes must use recipes/
+for page in example-workflows/*.mdx; do
+  [[ "$(basename "$page")" == "overview.mdx" ]] && continue
+  hero=$(awk '/^<Frame>/,/^<\/Frame>/' "$page" | head -5)
+  if [[ -n "$hero" ]] && ! echo "$hero" | rg -q '/images/recipes/'; then
+    echo "verify-docs-accuracy: $page hero must use /images/recipes/"
     FAIL=1
   fi
 done

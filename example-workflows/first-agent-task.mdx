@@ -6,7 +6,7 @@ description: Solo-builder recipe — from sign-up to an agent completing work on
 Goal: **assign one real task to an agent and watch it run** — the fastest proof that Notiky works for you.
 
 <Frame>
-  <img src="/images/tasks-board.png" alt="Notiky tasks board with Backlog, Todo, and In Progress columns" />
+  <img src="/images/recipes/recipe-first-agent-assign.png" alt="README task assigned to Builder agent with Properties panel visible" />
 </Frame>
 
 ---
@@ -38,7 +38,7 @@ Goal: **assign one real task to an agent and watch it run** — the fastest proo
     In the web app: **Settings → Runtimes**. Your machine should show **online** with detected agent CLIs.
 
     <Frame>
-      <img src="/images/quickstart-runtimes.png" alt="Settings Runtimes tab" />
+      <img src="/images/guides/quickstart-runtimes.png" alt="Settings Runtimes tab with machine online" />
     </Frame>
 
     ```bash
@@ -50,7 +50,7 @@ Goal: **assign one real task to an agent and watch it run** — the fastest proo
     Open **Agents** in the sidebar → **New agent**. Choose your runtime and provider (e.g. Claude Code). Name it something you'll recognize on the board — e.g. "Builder".
 
     <Frame>
-      <img src="/images/quickstart-new-agent.png" alt="New agent dialog with runtime and provider selection" />
+      <img src="/images/guides/quickstart-new-agent.png" alt="New agent dialog with runtime and provider selection" />
     </Frame>
   </Step>
 
@@ -66,7 +66,7 @@ Goal: **assign one real task to an agent and watch it run** — the fastest proo
     Assign the task to your agent. Move it to **Todo** or **In Progress** if needed. Open the task to see live updates as the agent runs on your machine.
 
     <Frame>
-      <img src="/images/tasks-assign.png" alt="Task detail showing Properties panel for assignee and status" />
+      <img src="/images/recipes/recipe-first-agent-assign.png" alt="Task assigned to Builder with Properties panel open" />
     </Frame>
   </Step>
 
@@ -79,28 +79,39 @@ Goal: **assign one real task to an agent and watch it run** — the fastest proo
 
 ## What good looks like
 
-- Task moves through **Backlog → Todo → In Progress → Done**
-- Agent posts progress in task comments
-- Your runtime stays online in Settings
-
-## If it fails
-
-See [Troubleshooting](/troubleshooting) — most first-run issues are daemon or PATH related.
-
-Common fixes:
-
-```bash
-notiky daemon restart
-notiky daemon status --output json
-```
-
----
+- Your runtime shows **online** in Settings
+- The agent appears on **Agents** with the name you chose
+- The task moves through columns and collects agent comments
+- You can `notiky task runs <id>` on your machine to see CLI output
 
 ## Next
 
+- [Decision → task → agent](/example-workflows/decision-to-task) — PM workflow
+- [Troubleshooting](/troubleshooting) — if the daemon or runtime is stuck
+
+---
+
+## Common blockers
+
+<AccordionGroup>
+  <Accordion title="Runtime shows offline">
+    Run `notiky daemon restart` and confirm **Settings → Runtimes** shows your machine online.
+  </Accordion>
+  <Accordion title="Agent never picked up the task">
+    Confirm the task is assigned to the agent (not unassigned) and status is **Todo** or **In Progress** — not **Backlog**.
+  </Accordion>
+  <Accordion title="Wrong workspace">
+    Check the workspace switcher in the sidebar matches where you created the agent and task.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related
+
 <CardGroup cols={2}>
-  <Card title="Tasks" href="/tasks" />
+  <Card title="Cloud Quickstart" href="/cloud-quickstart" />
   <Card title="Agents" href="/agents" />
-  <Card title="Skills" href="/skills" />
-  <Card title="Decision → task" href="/example-workflows/decision-to-task" />
+  <Card title="Tasks" href="/tasks" />
+  <Card title="FAQ" href="/faq" />
 </CardGroup>
