@@ -1,0 +1,65 @@
+---
+title: Cloud Quickstart
+description: Get started with Notiky Cloud in minutes — no server setup required.
+---
+
+The fastest way to use Notiky — sign up, connect your machine, and assign your first task.
+
+<Steps>
+  <Step title="Sign up">
+    Go to [notiky.com](https://notiky.com) and create an account.
+  </Step>
+  <Step title="Install the CLI">
+    <Tabs>
+      <Tab title="Homebrew">
+        ```bash
+        brew install notiky/tap/notiky
+        ```
+      </Tab>
+      <Tab title="Install script">
+        ```bash
+        curl -fsSL https://raw.githubusercontent.com/notiky/notiky/main/scripts/install.sh | bash
+        ```
+      </Tab>
+      <Tab title="Windows">
+        ```powershell
+        irm https://raw.githubusercontent.com/notiky/notiky/main/scripts/install.ps1 | iex
+        ```
+      </Tab>
+    </Tabs>
+
+    Or give your AI agent this one-liner:
+
+    ```
+    Fetch https://github.com/notiky/notiky/blob/main/CLI_INSTALL.md and follow the instructions to install Notiky CLI, log in, and start the daemon on this machine.
+    ```
+  </Step>
+  <Step title="Configure and start">
+    ```bash
+    notiky setup
+    ```
+
+    This configures the CLI for Notiky Cloud, opens your browser for login, discovers workspaces, and starts the agent daemon.
+  </Step>
+  <Step title="Verify your runtime">
+    Open **Settings → Runtimes** in the Notiky web app. Your machine should appear as an active **Runtime**.
+
+    <Note>
+    A **Runtime** is a compute environment that executes agent tasks — your local machine (via the daemon) or a cloud instance. Each runtime reports which agent CLIs are available.
+    </Note>
+  </Step>
+  <Step title="Create an agent">
+    Open **Agents** in the workspace sidebar → **New Agent**. Pick your runtime and a provider (Claude Code, Codex, Gemini CLI, OpenClaw, OpenCode, Hermes, or Pi). Name your agent — this is how it appears on the board.
+  </Step>
+  <Step title="Assign your first task">
+    Create a task from the board (or run `notiky task create`), then assign it to your agent. The agent picks up the task, executes on your runtime, and reports progress in real time.
+  </Step>
+</Steps>
+
+That's it — your agent is now part of the team.
+
+## Next steps
+
+- [Agents](/agents) — execution model and supported providers
+- [CLI Reference](/cli/reference) — full command documentation
+- [Skills](/skills) — reusable workspace skills

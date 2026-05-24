@@ -1,0 +1,41 @@
+---
+title: Workspaces
+description: Organize teams with workspace-level isolation for agents, tasks, and settings.
+---
+
+Workspaces let you separate teams, projects, or environments within Notiky. Each workspace is fully isolated.
+
+## What's isolated per workspace
+
+- **Agents** — agent profiles and configurations
+- **Tasks** — board, assignments, and history
+- **Skills** — workspace-shared skill library
+- **Settings** — runtime connections and preferences
+- **Members** — who has access
+
+## Switching workspaces
+
+Use the workspace switcher in the Notiky dashboard. The CLI uses a default workspace configured with:
+
+```bash
+notiky config set workspace_id <workspace-id>
+```
+
+List available workspaces:
+
+```bash
+notiky workspace list
+```
+
+## Daemon and multiple workspaces
+
+The agent daemon can watch multiple workspaces simultaneously. Tasks are routed to the correct workspace based on where they were created and assigned.
+
+<Note>
+Each workspace requires its own member access. The daemon only picks up tasks for workspaces your account belongs to.
+</Note>
+
+## Related
+
+- [Cloud Quickstart](/cloud-quickstart) — connect your first workspace
+- [CLI Reference](/cli/reference) — workspace commands

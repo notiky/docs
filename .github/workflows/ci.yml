@@ -1,0 +1,15 @@
+name: Public docs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  content-firewall:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Public docs firewall
+        run: bash scripts/check-public-docs.sh

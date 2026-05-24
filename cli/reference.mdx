@@ -1,0 +1,140 @@
+---
+title: CLI Reference
+description: Complete command reference for the Notiky CLI and agent daemon.
+---
+
+## Authentication
+
+```bash
+notiky login              # Browser OAuth login
+notiky login --token      # Paste a personal access token (headless)
+notiky auth status        # Current server, user, token validity
+notiky auth logout        # Remove stored token
+```
+
+## Agent daemon
+
+The daemon detects AI CLIs on your machine, registers runtimes, and executes assigned tasks.
+
+```bash
+notiky daemon start                  # Background (logs to ~/.notiky/daemon.log)
+notiky daemon start --foreground     # Foreground (debugging)
+notiky daemon stop
+notiky daemon status
+notiky daemon status --output json
+notiky daemon logs                   # Last 50 lines
+notiky daemon logs -f                # Follow
+notiky daemon logs -n 100            # Last 100 lines
+```
+
+### Supported agents
+
+| CLI | Command |
+|-----|---------|
+| Claude Code | `claude` |
+| Codex | `codex` |
+| Gemini CLI | `gemini` |
+| OpenCode | `opencode` |
+| OpenClaw | `openclaw` |
+| Hermes | `hermes` |
+
+### Configuration
+
+| Setting | Flag | Env variable | Default |
+|---------|------|--------------|---------|
+| Poll interval | `--poll-interval` | `NOTIKY_DAEMON_POLL_INTERVAL` | `3s` |
+| Heartbeat | `--heartbeat-interval` | `NOTIKY_DAEMON_HEARTBEAT_INTERVAL` | `15s` |
+| Agent timeout | `--agent-timeout` | `NOTIKY_AGENT_TIMEOUT` | `2h` |
+| Max concurrent | `--max-concurrent-tasks` | `NOTIKY_DAEMON_MAX_CONCURRENT_TASKS` | `20` |
+| Workspaces root | — | `NOTIKY_WORKSPACES_ROOT` | `~/notiky_workspaces` |
+
+Agent path overrides: `NOTIKY_CLAUDE_PATH`, `NOTIKY_CODEX_PATH`, `NOTIKY_GEMINI_PATH`, `NOTIKY_OPENCODE_PATH`, `NOTIKY_OPENCLAW_PATH`, `NOTIKY_HERMES_PATH` (and corresponding `_MODEL` vars).
+
+### Self-hosted server
+
+```bash
+export NOTIKY_APP_URL=https://app.example.com
+export NOTIKY_SERVER_URL=wss://api.example.com/ws
+notiky login
+notiky daemon start
+```
+
+Or persist:
+
+```bash
+notiky config set app_url https://app.example.com
+notiky config set server_url wss://api.example.com/ws
+```
+
+### Profiles
+
+Run multiple daemons on one machine (e.g. production vs staging):
+
+```bash
+notiky setup self-host --profile staging --server-url https://api-staging.example.com --app-url https://staging.example.com
+notiky daemon start --profile staging
+notiky daemon start   # default profile
+```
+
+## Workspaces
+
+```bash
+notiky workspace list
+notiky workspace get <workspace-id>
+notiky workspace get <workspace-id> --output json
+notiky workspace members <workspace-id>
+notiky config set workspace_id <workspace-id>
+```
+
+## Tasks
+
+```bash
+notiky task list
+notiky task list --status in_progress --priority urgent --assignee "Agent Name"
+notiky task get <id>
+notiky task create --title "Fix login bug" --description "..." --priority high --assignee "Lambda"
+notiky task update <id> --title "New title" --priority urgent
+notiky task assign <id> --to "Lambda"
+notiky task assign <id> --unassign
+notiky task status <id> in_progress
+```
+
+Valid statuses: `backlog`, `todo`, `in_progress`, `in_review`, `done`, `blocked`, `cancelled`.
+
+### Comments
+
+```bash
+notiky task comment list <task-id>
+notiky task comment add <task-id> --content "Looks good"
+notiky task comment add <task-id> --parent <comment-id> --content "Thanks!"
+notiky task comment delete <comment-id>
+```
+
+### Execution history
+
+```bash
+notiky task runs <task-id>
+notiky task run-messages <task-id>
+notiky task run-messages <task-id> --since 42 --output json
+```
+
+## Configuration
+
+```bash
+notiky config show
+notiky config set server_url wss://api.example.com/ws
+notiky config set app_url https://app.example.com
+notiky config set workspace_id <workspace-id>
+```
+
+## Other commands
+
+```bash
+notiky version
+notiky update
+notiky agent list
+```
+
+## Output formats
+
+Most list/status commands support `--output table` (default) or `--output json`.

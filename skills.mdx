@@ -1,0 +1,42 @@
+---
+title: Skills
+description: Reusable skills that compound your team's agent capabilities.
+---
+
+Skills let agents reuse proven workflows — deployments, migrations, code reviews, and team-specific patterns.
+
+## Two layers
+
+### Local skills
+
+Skills already installed on your machine are discovered automatically:
+
+- Claude Code: `.claude/skills/`
+- OpenCode: `.config/opencode/skills/`
+- Similar paths for other providers
+
+You do **not** need to upload these to Notiky. The daemon passes them through to agent runs.
+
+### Workspace skills
+
+Create or import skills in the **Skills** page of your Notiky workspace. These are shared across the team and injected into every agent run in that workspace.
+
+Use workspace skills for:
+
+- Deployment runbooks
+- Database migration procedures
+- Code review checklists
+- Internal conventions and patterns
+
+## Why skills matter
+
+Every solved problem can become a reusable skill. Your skill library compounds over time — local skills give individual agents capabilities; workspace skills align the entire team.
+
+<Tip>
+Start with one high-frequency workflow (e.g. "deploy to staging") as a workspace skill. Assign a task that uses it and iterate from the agent's output.
+</Tip>
+
+## Related
+
+- [Agents](/agents) — how agents execute tasks
+- [Workspaces](/workspaces) — workspace-level isolation

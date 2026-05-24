@@ -1,0 +1,79 @@
+---
+title: CLI Installation
+description: Install the Notiky CLI and start the agent daemon on your machine.
+---
+
+The `notiky` CLI connects your machine to Notiky — authentication, workspace management, and the agent daemon.
+
+## Install
+
+<Tabs>
+  <Tab title="Homebrew">
+    ```bash
+    brew install notiky/tap/notiky
+    ```
+  </Tab>
+  <Tab title="GitHub Releases">
+    ```bash
+    OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    ARCH=$(uname -m)
+    if [ "$ARCH" = "x86_64" ]; then ARCH="amd64"; fi
+
+    LATEST=$(curl -sI https://github.com/notiky/notiky/releases/latest \
+      | grep -i '^location:' | sed 's/.*tag\///' | tr -d '\r\n')
+
+    curl -sL "https://github.com/notiky/notiky/releases/download/${LATEST}/notiky_${OS}_${ARCH}.tar.gz" \
+      -o /tmp/notiky.tar.gz
+    tar -xzf /tmp/notiky.tar.gz -C /tmp notiky
+    sudo mv /tmp/notiky /usr/local/bin/notiky
+    rm /tmp/notiky.tar.gz
+    ```
+  </Tab>
+  <Tab title="Build from source">
+    ```bash
+    git clone https://github.com/notiky/notiky.git
+    cd notiky
+    make build
+    cp server/bin/notiky /usr/local/bin/notiky
+    ```
+  </Tab>
+</Tabs>
+
+## Quick start
+
+```bash
+notiky setup
+```
+
+Configures the CLI for Notiky Cloud, authenticates via browser, discovers workspaces, and starts the daemon.
+
+## Verify
+
+```bash
+notiky daemon status
+```
+
+Confirm:
+
+1. Status is `running`
+2. At least one agent is listed (`claude`, `codex`, `gemini`, `opencode`, `openclaw`, `hermes`, or `pi`)
+3. At least one workspace is being watched
+
+If the agents list is empty, install a supported provider CLI and restart:
+
+```bash
+notiky daemon stop && notiky daemon start
+```
+
+## Update
+
+```bash
+brew upgrade notiky/tap/notiky
+# or
+notiky update
+```
+
+## Next
+
+- [CLI Reference](/cli/reference) — full command documentation
+- [Cloud Quickstart](/cloud-quickstart) — end-to-end setup guide

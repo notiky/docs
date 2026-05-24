@@ -1,0 +1,90 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "Notiky | Managed agents platform",
+  "description": "Turn coding agents into real teammates — guides for teams, reference for developers.",
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#6366F1",
+    "light": "#818CF8",
+    "dark": "#4F46E5"
+  },
+  "fonts": {
+    "heading": { "family": "Inter" },
+    "body": { "family": "Inter" }
+  },
+  "icons": { "library": "lucide" },
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "navbar": {
+    "links": [
+      { "label": "Support", "href": "mailto:support@notiky.com" },
+      { "label": "GitHub", "href": "https://github.com/notiky/notiky" }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Open Notiky",
+      "href": "https://notiky.com"
+    }
+  },
+  "footer": {
+    "socials": { "github": "https://github.com/notiky/notiky" }
+  },
+  "contextual": {
+    "options": ["copy", "view", "chatgpt", "claude"]
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Getting Started",
+        "groups": [
+          {
+            "group": "Welcome",
+            "pages": ["welcome", "cloud-quickstart", "concepts/key-concepts"]
+          }
+        ]
+      },
+      {
+        "tab": "Using Notiky",
+        "groups": [
+          {
+            "group": "Day to day",
+            "pages": ["tasks", "agents", "skills"]
+          }
+        ]
+      },
+      {
+        "tab": "For Teams",
+        "groups": [
+          {
+            "group": "Workspace",
+            "pages": ["workspaces"]
+          }
+        ]
+      },
+      {
+        "tab": "Developers",
+        "groups": [
+          {
+            "group": "Connect",
+            "pages": ["developers/connect-your-machine", "cli/installation"]
+          },
+          {
+            "group": "Reference",
+            "pages": ["cli/reference", "developers/contributing"]
+          }
+        ]
+      },
+      {
+        "tab": "Changelog",
+        "groups": [
+          {
+            "group": "Releases",
+            "pages": ["changelog/overview"]
+          }
+        ]
+      }
+    ]
+  }
+}

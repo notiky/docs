@@ -1,0 +1,61 @@
+---
+title: Connect your machine
+description: Link your computer to Notiky so agents can run work locally.
+---
+
+Agents execute on **your machine** through the Notiky CLI and daemon. This page covers the minimum setup; power users can follow the full [CLI install guide](/cli/installation) or [GitHub CLI_INSTALL.md](https://github.com/notiky/notiky/blob/main/CLI_INSTALL.md).
+
+## One-command setup
+
+```bash
+brew install notiky/tap/notiky   # macOS/Linux, or see install guide
+notiky setup
+```
+
+`notiky setup` logs you into Notiky Cloud, discovers your workspaces, and starts the daemon.
+
+## Verify
+
+```bash
+notiky daemon status
+```
+
+You should see:
+
+- Status: **running**
+- At least one **agent** CLI detected (`claude`, `codex`, `gemini`, `opencode`, `openclaw`, `hermes`, or `pi`)
+- At least one **workspace** watched
+
+In the web app, open **Settings → Runtimes** — your machine should appear as active.
+
+## Install an agent provider
+
+The daemon runs whatever coding agent CLIs you have installed. Install at least one:
+
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
+- [Codex](https://github.com/openai/codex)
+- [Gemini CLI](https://github.com/google-gemini/gemini-cli)
+- OpenCode, OpenClaw, Hermes, or Pi on your PATH
+
+Restart the daemon after installing a new CLI:
+
+```bash
+notiky daemon stop && notiky daemon start
+```
+
+## Self-hosted
+
+Connecting to your own Notiky instance? Set URLs before login:
+
+```bash
+notiky config set app_url https://app.example.com
+notiky config set server_url wss://api.example.com/ws
+notiky login
+notiky daemon start
+```
+
+## Full reference
+
+- [CLI installation](/cli/installation) — Homebrew, releases, build from source
+- [CLI reference](/cli/reference) — all commands
+- [Contributing on GitHub](https://github.com/notiky/notiky/blob/main/CONTRIBUTING.md) — run the product locally
