@@ -1,0 +1,132 @@
+---
+title: Spec review loop
+description: PM writes the spec, agent implements, you review in In Progress — product workflow recipe.
+---
+
+Goal: **separate shaping work from implementation**. You use Conversations to draft a spec, create a task, assign an agent, and review the output without losing context.
+
+<Frame>
+  <img src="/images/conversations-modes.png" alt="Conversation composer with Ask, Think, Plan, and Do modes" />
+</Frame>
+
+---
+
+## Scenario
+
+You are a PM or founder preparing a feature. You want to challenge your own assumptions before an agent writes code, then review the implementation like a code reviewer.
+
+**Before:** one giant prompt in a chat tool, no audit trail.
+
+**After:** Plan-mode notes → task with acceptance criteria → agent run → human review on the board.
+
+---
+
+## Copy-paste task example
+
+**Title:** Add workspace-level export for task board (CSV)
+
+**Description:**
+
+```
+User story: workspace admin exports all tasks for reporting
+
+Acceptance criteria:
+- Export button on Tasks list view (not board)
+- CSV columns: id, title, status, priority, assignee, created_at
+- Respects current project filter if one is active
+- Empty workspace → download with header row only
+
+Out of scope: PDF, scheduled exports, cross-workspace export
+```
+
+---
+
+## Steps
+
+<Steps>
+  <Step title="Think through the feature">
+    Open **Conversations** → **Think**. Ask Notiky to challenge scope and list risks:
+
+    > We're adding CSV export for tasks. What are we forgetting? Push back on scope creep.
+
+    Capture decisions in the thread before you write the task.
+  </Step>
+
+  <Step title="Draft the spec in Plan mode">
+    Switch to **Plan**. Ask for a task title, description, and acceptance criteria — still without mutating the board if you prefer control.
+
+    Copy the output into your task draft, or switch to **Do** if you want the agent to create the task directly.
+  </Step>
+
+  <Step title="Create and refine the task">
+    Open **Tasks** → **New Task**. Paste the spec. Tighten acceptance criteria until a stranger could verify done/not-done.
+  </Step>
+
+  <Step title="Assign to an implementation agent">
+    Assign to an agent on a runtime with repo access — e.g. Claude Code or Cursor Agent on your co-founder's machine.
+
+    <Frame>
+      <img src="/images/tasks-assign.png" alt="Task detail with assignee and status in Properties" />
+    </Frame>
+  </Step>
+
+  <Step title="Track in In Progress">
+    While the agent runs, keep the task in **In Progress**. Subscribe teammates or add yourself as assignee for review if your workflow uses dual ownership.
+
+    <Frame>
+      <img src="/images/tasks-in-review.png" alt="Task detail while work is in progress" />
+    </Frame>
+  </Step>
+
+  <Step title="Review like a PR">
+    When the agent marks progress or completes, review diffs locally or in your usual git flow. Comment on the task:
+
+    - "Missing empty-state test"
+    - "Please rename column header to Created at (UTC)"
+
+    Re-assign or move back to **In Progress** if changes are needed.
+  </Step>
+
+  <Step title="Ship and document">
+    Move to **Done**. Link the conversation in a task comment so future readers know **why** the feature exists.
+  </Step>
+</Steps>
+
+---
+
+## Mode cheat sheet
+
+| Phase | Mode | Why |
+|-------|------|-----|
+| Explore | Think | Challenge assumptions |
+| Spec | Plan | Draft tasks without executing |
+| Create task | Do or manual | Board becomes source of truth |
+| Implement | Agent on task | Execution on runtime |
+| Review | Human on task | Comments + status |
+
+---
+
+<AccordionGroup>
+  <Accordion title="Spec was too vague and agent guessed wrong">
+    Tighten acceptance criteria. Add a "Out of scope" section. See [Tasks](/tasks) tips.
+  </Accordion>
+
+  <Accordion title="Review takes longer than implementation">
+    Normal for early agent workflows. Shorter tasks with narrower scope improve review speed.
+  </Accordion>
+
+  <Accordion title="Need legal or security review">
+    Assign to a human first for review, then to an agent for implementation — two tasks, clear order.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Decision → task → agent" href="/example-workflows/decision-to-task" />
+  <Card title="Conversations" href="/conversations" />
+  <Card title="Tasks" href="/tasks" />
+  <Card title="Bugfix while away" href="/example-workflows/bugfix-while-away" />
+</CardGroup>

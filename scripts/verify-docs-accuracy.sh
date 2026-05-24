@@ -5,6 +5,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 APP_ROOT="${NOTIKY_APP_ROOT:-$(cd "$ROOT/../notiky-app" 2>/dev/null && pwd || true)}"
 CATALOG="${APP_ROOT}/server/internal/daemon/provider_catalog.go"
+SHOTS="${ROOT}/SHOTS.md"
 
 cd "$ROOT"
 FAIL=0
@@ -43,13 +44,74 @@ for cmd in "daemon restart" "task search" "setup"; do
   fi
 done
 
+# PNG assets listed in SHOTS.md must exist
+if [[ -f "$SHOTS" ]]; then
+  while IFS= read -r png; do
+    [[ -z "$png" ]] && continue
+    if [[ ! -f "images/$png" ]]; then
+      echo "verify-docs-accuracy: missing screenshot: images/$png"
+      FAIL=1
+    fi
+  done < <(grep -oE '`[a-z0-9-]+\.png`' "$SHOTS" | tr -d '`')
+fi
+
+# Operator guides must reference at least one product PNG
+OPERATOR_PAGES=(
+  welcome.mdx
+  cloud-quickstart.mdx
+  tasks.mdx
+  agents.mdx
+  conversations.mdx
+  skills.mdx
+  workspaces.mdx
+  knowledge.mdx
+  projects.mdx
+)
+for page in "${OPERATOR_PAGES[@]}"; do
+  if ! rg -q '/images/[a-z0-9-]+\.png' "$page" 2>/dev/null; then
+    echo "verify-docs-accuracy: $page missing PNG reference"
+    FAIL=1
+  fi
+done
+
+# docs.json pages must exist on disk
+if command -v python3 >/dev/null 2>&1; then
+  while IFS= read -r page; do
+    [[ -z "$page" ]] && continue
+    if [[ ! -f "${page}.mdx" ]]; then
+      echo "verify-docs-accuracy: docs.json page missing: ${page}.mdx"
+      FAIL=1
+    fi
+  done < <(python3 - <<'PY'
+import json
+with open("docs.json") as f:
+    data = json.load(f)
+for tab in data.get("navigation", {}).get("tabs", []):
+    for group in tab.get("groups", []):
+        for page in group.get("pages", []):
+            print(page)
+PY
+)
+fi
+
 while IFS= read -r -d '' f; do
   lines=$(wc -l < "$f" | tr -d ' ')
   base=$(basename "$f")
+  dir=$(basename "$(dirname "$f")")
   case "$base" in
     welcome.mdx|capabilities.mdx|troubleshooting.mdx) min=60 ;;
+    faq.mdx) min=80 ;;
     cloud-quickstart.mdx|tasks.mdx|agents.mdx) min=80 ;;
-    *) min=0 ;;
+    overview.mdx)
+      if [[ "$dir" == "example-workflows" ]]; then min=50; else min=0; fi
+      ;;
+    *)
+      if [[ "$dir" == "example-workflows" ]]; then
+        min=100
+      else
+        min=0
+      fi
+      ;;
   esac
   if [[ "$min" -gt 0 && "$lines" -lt "$min" ]]; then
     echo "verify-docs-accuracy: $f too short ($lines lines, min $min)"

@@ -1,0 +1,106 @@
+---
+title: FAQ
+description: Common questions about Notiky — for founders, solo-builders, and PMs.
+---
+
+Quick answers before you dive into guides. For step-by-step setup, start with [Cloud Quickstart](/cloud-quickstart). For failures, see [Troubleshooting](/troubleshooting).
+
+<CardGroup cols={2}>
+  <Card title="Cloud Quickstart" icon="rocket" href="/cloud-quickstart" />
+  <Card title="Key concepts" icon="lightbulb" href="/concepts/key-concepts" />
+  <Card title="Workflow recipes" icon="book-open" href="/example-workflows/overview" />
+  <Card title="Troubleshooting" icon="life-buoy" href="/troubleshooting" />
+</CardGroup>
+
+---
+
+<AccordionGroup>
+  <Accordion title="What is Notiky — and how is it different from ChatGPT or Cursor?">
+    Notiky is a **workspace for building products with AI teammates**. You assign work on a shared board, track progress like you would with humans, and compound context over time.
+
+    Chat windows are great for one-off prompts. Notiky is for **ongoing work**: tasks, agents, conversations, skills, and knowledge that persist across sessions.
+  </Accordion>
+
+  <Accordion title="What is an agent in Notiky?">
+    An **agent** is an AI teammate with a profile on your board. You assign tasks to agents the same way you assign to people. Agents run on your **runtime** (usually your laptop via the CLI daemon) using a provider like Claude Code or Cursor Agent.
+
+    See [Agents](/agents) and [Key concepts](/concepts/key-concepts).
+  </Accordion>
+
+  <Accordion title="What is the difference between an agent and a conversation?">
+    **Conversations** are for thinking — Ask, Think, Plan, and Do modes help you explore decisions and draft work.
+
+    **Agents** are for executing assigned tasks on the board. Many teams think in Conversations first, then assign implementation to an agent.
+
+    See [Conversations](/conversations) vs [Tasks](/tasks).
+  </Accordion>
+
+  <Accordion title="What is a runtime?">
+    A **runtime** is where agent work actually runs — typically your computer after you install the Notiky CLI and run `notiky setup`. Your machine appears under **Settings → Runtimes** when online.
+
+    Notiky routes agent-assigned tasks to a runtime that has the right coding agent CLI installed.
+  </Accordion>
+
+  <Accordion title="Does my code run in the cloud?">
+    **Agent execution runs on your connected machine** by default — the daemon spawns your local coding agent CLI in an isolated workspace folder. Notiky Cloud hosts the board, auth, and coordination — not your repository checkout.
+
+    Your source code stays where you put it unless you configure integrations that sync externally.
+  </Accordion>
+
+  <Accordion title="What data leaves my machine?">
+    Task titles, descriptions, comments, and agent progress stream to Notiky so your team can collaborate. The agent CLI on your runtime reads your local project files to do the work you assigned.
+
+    For security-sensitive work, use a dedicated workspace and review [Connect your machine](/developers/connect-your-machine) with your team’s policies.
+  </Accordion>
+
+  <Accordion title="Which coding agents does Notiky support?">
+    **Claude Code**, **Codex**, **OpenCode**, **Cursor Agent**, **Copilot**, **OpenClaw**, **Hermes**, **Gemini**, and **Pi** — detected automatically on your PATH when the daemon runs.
+
+    Install at least one before assigning agent tasks. See [Agents](/agents).
+  </Accordion>
+
+  <Accordion title="Do I need the CLI?">
+    **To run agents on your machine, yes** — the CLI installs the daemon that picks up assigned work. You can still use the web app for planning, conversations, and human-assigned tasks without a connected runtime.
+
+    Non-technical teammates often use the board only; a technical co-founder connects the runtime.
+  </Accordion>
+
+  <Accordion title="Can I invite non-technical teammates?">
+    Yes. Invite members from workspace **Settings → Members**. They can create tasks, use Conversations, and assign work to agents that run on a connected runtime — without installing the CLI themselves.
+
+    See [Onboard a teammate](/example-workflows/onboard-teammate).
+  </Accordion>
+
+  <Accordion title="Can one person use Notiky solo?">
+    Absolutely. Solo founders use Notiky as a **product brain plus agent board** — assign implementation to an agent while you focus on customers, specs, or sales.
+
+    Start with [First agent task](/example-workflows/first-agent-task).
+  </Accordion>
+
+  <Accordion title="How is Notiky priced?">
+    See current plans at [notiky.com/pricing](https://notiky.com/pricing). This documentation does not list tier limits — always check the live pricing page for up-to-date details.
+  </Accordion>
+
+  <Accordion title="Is there an API for integrations?">
+    Public API documentation is not part of this site yet. Use the **Developers** tab for CLI and daemon setup. MCP and deeper integration docs will ship when the public API surface is ready.
+  </Accordion>
+
+  <Accordion title="Something is broken — where do I start?">
+    Open [Troubleshooting](/troubleshooting). Most issues are runtime or daemon related: machine offline, agent CLI not on PATH, or task not assigned to an agent.
+
+    ```bash
+    notiky daemon status
+    notiky daemon restart
+    ```
+  </Accordion>
+
+  <Accordion title="Can I give setup instructions to Cursor or Claude Code?">
+    Yes. Copy the prompt from [Setup with AI](/developers/setup-with-ai) into your coding agent for one-shot CLI install and daemon verification.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Still have questions?
+
+Email [support@notiky.com](mailto:support@notiky.com) or open [notiky.com](https://notiky.com) to sign up and try a task in your workspace.

@@ -54,7 +54,8 @@
               "cloud-quickstart",
               "capabilities",
               "concepts/key-concepts",
-              "troubleshooting"
+              "troubleshooting",
+              "faq"
             ]
           }
         ]
@@ -86,7 +87,10 @@
               "example-workflows/overview",
               "example-workflows/first-agent-task",
               "example-workflows/decision-to-task",
-              "example-workflows/small-team-setup"
+              "example-workflows/small-team-setup",
+              "example-workflows/bugfix-while-away",
+              "example-workflows/spec-review-loop",
+              "example-workflows/onboard-teammate"
             ]
           }
         ]

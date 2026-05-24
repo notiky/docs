@@ -1,0 +1,120 @@
+---
+title: Bugfix while away
+description: Assign a bugfix to an agent and check progress asynchronously — solo founder recipe.
+---
+
+Goal: **ship a fix without babysitting the terminal**. You write a clear bug report, assign an agent, and review when you're back from meetings, calls, or customer work.
+
+<Frame>
+  <img src="/images/tasks-board.png" alt="Tasks board ready for a new bugfix assignment" />
+</Frame>
+
+---
+
+## Scenario
+
+You are a solo founder. Production has a bug. You have 30 minutes before back-to-back calls. You want an agent to start investigating and implementing while you're unavailable.
+
+**Before:** vague Slack note, "fix the login thing."
+
+**After:** a task with reproduction steps, assigned to a named agent, moving through **In Progress** with comments you can review later.
+
+---
+
+## Copy-paste task example
+
+**Title:** Fix 401 after OAuth callback on `/auth/callback`
+
+**Description:**
+
+```
+Reproduction:
+1. Sign in with Google on staging
+2. Redirect lands on /auth/callback
+3. User sees 401 instead of dashboard
+
+Expected: redirect to workspace home
+Acceptance: staging OAuth flow completes; add test if one exists nearby
+
+Notes: check session cookie domain and callback handler order
+```
+
+---
+
+## Steps
+
+<Steps>
+  <Step title="Confirm your runtime is online">
+    Open **Settings → Runtimes**. Your machine should show online with at least one agent CLI detected.
+
+    ```bash
+    notiky daemon status
+    ```
+
+    If offline, run `notiky setup` or `notiky daemon restart`.
+  </Step>
+
+  <Step title="Create the bugfix task">
+    Open **Tasks** → **New Task**. Paste the title and description above (adapt to your bug). Set priority if it's blocking customers.
+  </Step>
+
+  <Step title="Assign to your agent">
+    Assign the task to a named agent — e.g. "Builder" — on your connected runtime. Pick an agent that already has repo access on your machine.
+
+    <Frame>
+      <img src="/images/tasks-assign.png" alt="Task Properties panel with assignee selected" />
+    </Frame>
+  </Step>
+
+  <Step title="Move to In Progress and step away">
+    Move the task to **In Progress** if it isn't already. Close the laptop lid if you need to — the daemon keeps running on your machine (keep power and network in mind).
+  </Step>
+
+  <Step title="Review async from Inbox or the task">
+    When you're back, open the task. Read agent comments like a teammate's update. Approve, request changes, or re-assign.
+
+    ```bash
+    notiky task search "OAuth callback"
+    notiky task comment list <task-id>
+    ```
+  </Step>
+
+  <Step title="Close the loop">
+    Move to **In Review** while you verify on staging, then **Done** when shipped. Add a one-line comment with the commit or deploy link for future you.
+  </Step>
+</Steps>
+
+---
+
+## What good looks like
+
+- Agent posts progress or blockers in task comments — not silence for hours
+- Task status reflects reality (**In Progress** → **In Review** → **Done**)
+- You didn't need to watch logs live; you reviewed a paper trail
+
+---
+
+<AccordionGroup>
+  <Accordion title="Agent didn't start">
+    See [Troubleshooting](/troubleshooting) — usually daemon offline or task not assigned to an agent.
+  </Accordion>
+
+  <Accordion title="Agent went down a wrong path">
+    Comment with a correction and narrower acceptance criteria. Consider a [workspace skill](/skills) for repeat bugfix patterns.
+  </Accordion>
+
+  <Accordion title="Bug needs human judgment">
+    Re-assign to yourself or a teammate. Use [Conversations](/conversations) in **Think** mode to decide approach before re-assigning the agent.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Tasks" href="/tasks" />
+  <Card title="First agent task" href="/example-workflows/first-agent-task" />
+  <Card title="Spec review loop" href="/example-workflows/spec-review-loop" />
+  <Card title="Troubleshooting" href="/troubleshooting" />
+</CardGroup>
