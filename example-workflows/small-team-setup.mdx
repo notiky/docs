@@ -6,7 +6,7 @@ description: Two humans, two machines, shared workspace — agents on each runti
 Goal: **a co-founder and a PM (or second founder) share one workspace**, each with their own machine connected as a runtime.
 
 <Frame>
-  <img src="/images/diagrams/workspace-isolation.svg" alt="One workspace, multiple runtimes and members" />
+  <img src="/images/workspaces-switcher.png" alt="Workspace switcher with shared team workspace" />
 </Frame>
 
 ---
@@ -40,6 +40,10 @@ Agents and tasks live in the **shared board**. Each runtime only runs work assig
     ```
 
     Alex creates **New agent** on Runtime A — e.g. "Implementer" with Claude Code.
+
+    <Frame>
+      <img src="/images/quickstart-new-agent.png" alt="New agent dialog" />
+    </Frame>
   </Step>
 
   <Step title="Connect Sam's machine (optional)">
@@ -55,8 +59,24 @@ Agents and tasks live in the **shared board**. Each runtime only runs work assig
 
   <Step title="Run a joint dry run">
     Sam creates a task with clear acceptance criteria. Alex assigns it to Implementer. Both watch progress on the board and comment async.
+
+    <Frame>
+      <img src="/images/tasks-board.png" alt="Shared tasks board" />
+    </Frame>
   </Step>
 </Steps>
+
+---
+
+<AccordionGroup>
+  <Accordion title="Two runtimes, one repo">
+    Each machine checks out the repo independently. Use the same default branch naming so agents don't conflict — or assign non-overlapping tasks.
+  </Accordion>
+
+  <Accordion title="Only one person wants CLI">
+    See [Onboard a teammate](/example-workflows/onboard-teammate) — one runtime can serve the whole team early on.
+  </Accordion>
+</AccordionGroup>
 
 ---
 
@@ -91,5 +111,5 @@ notiky agent list
 <CardGroup cols={2}>
   <Card title="Workspaces" href="/workspaces" />
   <Card title="Agents" href="/agents" />
-  <Card title="Connect your machine" href="/developers/connect-your-machine" />
+  <Card title="Onboard a teammate" href="/example-workflows/onboard-teammate" />
 </CardGroup>

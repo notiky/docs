@@ -2,6 +2,8 @@
 
 Real product screenshots — not stock art. Run after `make dev` in `notiky-app/`.
 
+**Viewport:** 1280×800 (set in the Playwright spec).
+
 ```bash
 # Terminal 1
 cd notiky-app && make dev
@@ -14,16 +16,17 @@ Output directory: `../docs/images/` (committed to `notiky/docs`).
 
 | Filename | Route / action | Used in |
 |----------|----------------|---------|
-| `welcome-hero.png` | Dashboard or landing `#product` | welcome |
+| `welcome-hero.png` | Tasks board (hero stand-in) | welcome |
 | `quickstart-runtimes.png` | Settings → Runtimes | cloud-quickstart |
-| `quickstart-new-agent.png` | Agents → New agent | cloud-quickstart, agents |
-| `tasks-board.png` | Tasks board | tasks |
-| `tasks-assign.png` | Task detail assignee | tasks |
-| `agents-board.png` | Agent on board | agents |
+| `quickstart-new-agent.png` | Agents → New agent dialog | cloud-quickstart, agents, first-agent-task |
+| `tasks-board.png` | Tasks board | tasks, cloud-quickstart, recipes |
+| `tasks-assign.png` | Task detail → Properties | tasks, bugfix-while-away, spec-review-loop |
+| `tasks-in-review.png` | Task detail (in progress) | spec-review-loop |
+| `agents-board.png` | Agents list | agents |
 | `skills-page.png` | Skills | skills |
-| `workspaces-switcher.png` | Workspace switcher | workspaces |
-| `conversations-modes.png` | Chat Ask/Think/Plan/Do | conversations |
-| `knowledge-graph.png` | Knowledge | knowledge |
+| `workspaces-switcher.png` | Workspace switcher | workspaces, onboard-teammate |
+| `conversations-modes.png` | Conversations/new mode pills | conversations, spec-review-loop |
+| `knowledge-graph.png` | Knowledge graph view | knowledge |
 | `projects-page.png` | Projects | projects |
 
-Until captures exist, guides use branded SVG diagrams under `images/diagrams/`.
+Regenerate after UI changes that affect these routes.

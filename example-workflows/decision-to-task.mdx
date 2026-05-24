@@ -6,7 +6,7 @@ description: PM workflow — use Conversations to think, then assign an agent to
 Goal: **turn a product decision into assigned work** without losing context between chat and the board.
 
 <Frame>
-  <img src="/images/diagrams/runtime-flow.svg" alt="Conversation modes feed into tasks and agents" />
+  <img src="/images/conversations-modes.png" alt="Conversation composer with Ask, Think, Plan, and Do modes" />
 </Frame>
 
 ---
@@ -42,6 +42,10 @@ You're deciding whether to ship feature X this sprint. You want to:
 
   <Step title="Assign implementation">
     Pick one task with clear acceptance criteria. Assign it to an [agent](/agents) that has access to your repo via a connected runtime.
+
+    <Frame>
+      <img src="/images/tasks-assign.png" alt="Task detail with assignee in Properties panel" />
+    </Frame>
   </Step>
 
   <Step title="Track with the team">
@@ -72,10 +76,26 @@ Full reference: [Conversations](/conversations).
 
 ---
 
+<AccordionGroup>
+  <Accordion title="Conversation got too long">
+    Start a new thread for a new decision. Link the old conversation URL in the first task comment for traceability.
+  </Accordion>
+
+  <Accordion title="Plan mode output is too vague">
+    Ask for acceptance criteria per task before moving to **Do** or manual task creation.
+  </Accordion>
+</AccordionGroup>
+
+---
+
 ## Related
 
 <CardGroup cols={2}>
   <Card title="Conversations" href="/conversations" />
   <Card title="Tasks" href="/tasks" />
   <Card title="First agent task" href="/example-workflows/first-agent-task" />
+  <Card title="Spec review loop" href="/example-workflows/spec-review-loop" />
+  <Card title="FAQ" href="/faq">
+    Common questions about agents and Conversations.
+  </Card>
 </CardGroup>

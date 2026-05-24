@@ -6,7 +6,7 @@ description: Solo-builder recipe — from sign-up to an agent completing work on
 Goal: **assign one real task to an agent and watch it run** — the fastest proof that Notiky works for you.
 
 <Frame>
-  <img src="/images/diagrams/task-lifecycle.svg" alt="Create, assign, execute, review, done" />
+  <img src="/images/tasks-board.png" alt="Notiky tasks board with Backlog, Todo, and In Progress columns" />
 </Frame>
 
 ---
@@ -37,6 +37,10 @@ Goal: **assign one real task to an agent and watch it run** — the fastest proo
   <Step title="Confirm your runtime">
     In the web app: **Settings → Runtimes**. Your machine should show **online** with detected agent CLIs.
 
+    <Frame>
+      <img src="/images/quickstart-runtimes.png" alt="Settings Runtimes tab" />
+    </Frame>
+
     ```bash
     notiky daemon status
     ```
@@ -44,6 +48,10 @@ Goal: **assign one real task to an agent and watch it run** — the fastest proo
 
   <Step title="Create an agent">
     Open **Agents** in the sidebar → **New agent**. Choose your runtime and provider (e.g. Claude Code). Name it something you'll recognize on the board — e.g. "Builder".
+
+    <Frame>
+      <img src="/images/quickstart-new-agent.png" alt="New agent dialog with runtime and provider selection" />
+    </Frame>
   </Step>
 
   <Step title="Create a small, concrete task">
@@ -56,6 +64,10 @@ Goal: **assign one real task to an agent and watch it run** — the fastest proo
 
   <Step title="Assign and watch">
     Assign the task to your agent. Move it to **Todo** or **In Progress** if needed. Open the task to see live updates as the agent runs on your machine.
+
+    <Frame>
+      <img src="/images/tasks-assign.png" alt="Task detail showing Properties panel for assignee and status" />
+    </Frame>
   </Step>
 
   <Step title="Review like a teammate">
@@ -74,6 +86,13 @@ Goal: **assign one real task to an agent and watch it run** — the fastest proo
 ## If it fails
 
 See [Troubleshooting](/troubleshooting) — most first-run issues are daemon or PATH related.
+
+Common fixes:
+
+```bash
+notiky daemon restart
+notiky daemon status --output json
+```
 
 ---
 
