@@ -83,14 +83,14 @@ while IFS= read -r -d '' file; do
   rel="${file#"$ROOT/"}"
   rel="${rel#./}"
   case "$rel" in
-    *.mdx|docs.json|README.md|SSOT.md|RESEARCH-BLOG-PIPELINE.md|AUDIT*.md|research/README.md|research-tab.future.json|logo/*|images/*|favicon.*|.gitignore|scripts/check-public-docs.sh|.github/workflows/*) ;;
+    *.mdx|docs.json|README.md|SSOT.md|RESEARCH-BLOG-PIPELINE.md|AUDIT*.md|ACCURACY-MATRIX.md|ASSETS.md|SHOTS.md|research/README.md|research-tab.future.json|logo/*|images/*|favicon.*|style.css|.gitignore|scripts/check-public-docs.sh|scripts/verify-docs-accuracy.sh|.github/workflows/*) ;;
     .gitkeep) ;;
     *)
       echo "check-public-docs: disallowed file in publish folder: $rel"
       FAIL=1
       ;;
   esac
-done < <(find "$PUBLIC_DOCS_DIR" -type f ! -path '*/.git/*' ! -path '*/scripts/*' -print0)
+done < <(find "$PUBLIC_DOCS_DIR" -type f ! -path '*/.git/*' ! -path '*/.cursor/*' ! -path '*/scripts/*' -print0)
 
 if [[ "$FAIL" -ne 0 ]]; then
   echo ""
