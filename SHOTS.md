@@ -2,7 +2,15 @@
 
 Real product screenshots — not stock art. Run after `make dev` in `notiky-app/`.
 
-**Viewport:** 1280×800 (set in the Playwright spec).
+**Viewport:** 1440×900. Captures crop to the center `main` panel (no sidebar, no assistant rail, no cookie banner).
+
+**Clean capture rules:**
+
+- Dismiss cookie banner (`notiky_analytics_consent=denied`)
+- Close assistant rail (`Cmd/Ctrl+.`) before page shots
+- Dialog shots: dialog content only (New agent, Settings → Runtimes)
+- Workspace switcher: dropdown menu only
+- Realistic task copy (no `Docs screenshot…` test strings)
 
 ```bash
 # Terminal 1
