@@ -44,18 +44,32 @@ for cmd in "daemon restart" "task search" "setup"; do
   fi
 done
 
-# PNG assets listed in SHOTS.md must exist
+# PNG assets listed in SHOTS.md must exist and meet minimum size
+png_min_bytes() {
+  case "$1" in
+    workspaces-switcher.png) echo 10000 ;;
+    quickstart-new-agent.png) echo 12000 ;;
+    *) echo 15000 ;;
+  esac
+}
 if [[ -f "$SHOTS" ]]; then
   while IFS= read -r png; do
     [[ -z "$png" ]] && continue
     if [[ ! -f "images/$png" ]]; then
       echo "verify-docs-accuracy: missing screenshot: images/$png"
       FAIL=1
+    elif command -v stat >/dev/null 2>&1; then
+      size=$(stat -f%z "images/$png" 2>/dev/null || stat -c%s "images/$png" 2>/dev/null || echo 0)
+      min=$(png_min_bytes "$png")
+      if [[ "$size" -lt "$min" ]]; then
+        echo "verify-docs-accuracy: screenshot too small (${size} bytes, min ${min}): images/$png"
+        FAIL=1
+      fi
     fi
   done < <(grep -oE '`[a-z0-9-]+\.png`' "$SHOTS" | tr -d '`')
 fi
 
-# Operator guides must reference at least one product PNG
+# Operator guides must reference product media (PNG or diagram SVG)
 OPERATOR_PAGES=(
   welcome.mdx
   cloud-quickstart.mdx
@@ -68,8 +82,8 @@ OPERATOR_PAGES=(
   projects.mdx
 )
 for page in "${OPERATOR_PAGES[@]}"; do
-  if ! rg -q '/images/[a-z0-9-]+\.png' "$page" 2>/dev/null; then
-    echo "verify-docs-accuracy: $page missing PNG reference"
+  if ! rg -q '/images/(diagrams/)?[a-z0-9-]+\.(png|svg)' "$page" 2>/dev/null; then
+    echo "verify-docs-accuracy: $page missing image reference"
     FAIL=1
   fi
 done
