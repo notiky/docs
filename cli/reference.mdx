@@ -161,6 +161,72 @@ notiky agent list
 
 ---
 
+## MCP
+
+The Notiky [Model Context Protocol](https://modelcontextprotocol.io) surface lets coding agents (Cursor, Claude Code, Codex) read and write your workspace brain — decisions, lessons, context packs, and project state — over a standard MCP transport.
+
+### Tokens
+
+Workspace MCP tokens authenticate the hosted `/mcp` endpoint and the `notiky mcp call` command.
+
+```bash
+notiky mcp tokens create [name]    # Create a token (prints the secret once)
+notiky mcp tokens list             # List tokens for the current workspace
+notiky mcp tokens revoke <id>      # Revoke a token by ID
+```
+
+Store the secret as `NOTIKY_MCP_TOKEN` for hooks and scripts.
+
+### Local server
+
+Bridge Notiky into a local agent over stdio:
+
+```bash
+notiky mcp serve --workspace acme
+notiky mcp serve --workspace 7c5e... --transport stdio
+```
+
+The CLI proxies tool calls to the Notiky backend over HTTP using your saved login token — no direct database access. Remote agents can instead connect to the hosted `/mcp` HTTP endpoint with a workspace MCP token.
+
+### Call a tool
+
+Invoke a single MCP tool against the hosted `/mcp` endpoint — useful for scripts and IDE hooks:
+
+```bash
+notiky mcp call <tool> --arg key=value [--arg key=value ...] [--token <token>]
+```
+
+Use `--token` or set `NOTIKY_MCP_TOKEN`. Examples:
+
+```bash
+notiky mcp call notiky.profile --arg project_id=<uuid>
+notiky mcp call notiky.search_lessons --arg project_id=<uuid> --arg query="materialized views"
+```
+
+The command runs a full MCP handshake (`initialize` + `tools/call`) and prints the tool's text result.
+
+---
+
+## Resolve
+
+Resolve workspace and project identifiers from local context — handy inside scripts and IDE hooks.
+
+```bash
+notiky resolve project                       # From $PWD's git origin remote
+notiky resolve project --path /path/to/repo  # From an explicit directory
+```
+
+Prints just the project UUID on success. Capture it for downstream commands:
+
+```bash
+PROJECT_ID=$(notiky resolve project --path "$PWD")
+notiky mcp call notiky.profile --arg project_id="$PROJECT_ID"
+```
+
+The lookup uses the same `repo_remote` matching that powers `notiky project link`, so the repo must have an `origin` remote that matches a linked project in the current workspace.
+
+---
+
 ## Configuration
 
 ```bash
