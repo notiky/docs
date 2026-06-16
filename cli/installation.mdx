@@ -20,31 +20,9 @@ The `notiky` CLI connects your machine to Notiky — authentication, workspace m
     brew install notiky/tap/notiky
     ```
   </Tab>
-  <Tab title="GitHub Releases">
-    ```bash
-    OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-    ARCH=$(uname -m)
-    if [ "$ARCH" = "x86_64" ]; then ARCH="amd64"; fi
-
-    LATEST=$(curl -sI https://github.com/notiky/notiky/releases/latest \
-      | grep -i '^location:' | sed 's/.*tag\///' | tr -d '\r\n')
-
-    curl -sL "https://github.com/notiky/notiky/releases/download/${LATEST}/notiky_${OS}_${ARCH}.tar.gz" \
-      -o /tmp/notiky.tar.gz
-    tar -xzf /tmp/notiky.tar.gz -C /tmp notiky
-    sudo mv /tmp/notiky /usr/local/bin/notiky
-    rm /tmp/notiky.tar.gz
-    ```
-  </Tab>
-  <Tab title="Build from source">
-    ```bash
-    git clone https://github.com/notiky/notiky.git
-    cd notiky
-    make build
-    cp server/bin/notiky /usr/local/bin/notiky
-    ```
-  </Tab>
 </Tabs>
+
+Need step-by-step guidance? Follow [Cloud Quickstart](/cloud-quickstart) or paste the prompt from [Setup with AI](/developers/setup-with-ai) into your coding agent.
 
 ---
 
@@ -111,5 +89,6 @@ notiky update
 <CardGroup cols={2}>
   <Card title="CLI reference" href="/cli/reference" />
   <Card title="Cloud Quickstart" href="/cloud-quickstart" />
+  <Card title="Integrations" href="/developers/integrations" />
   <Card title="Setup with AI" href="/developers/setup-with-ai" />
 </CardGroup>

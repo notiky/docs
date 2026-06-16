@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 APP_ROOT="${NOTIKY_APP_ROOT:-$(cd "$ROOT/../notiky-app" 2>/dev/null && pwd || true)}"
 CATALOG="${APP_ROOT}/server/internal/daemon/provider_catalog.go"
-SHOTS="${ROOT}/SHOTS.md"
+SHOTS="${ROOT}/.internal/SHOTS.md"
 
 cd "$ROOT"
 FAIL=0

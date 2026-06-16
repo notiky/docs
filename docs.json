@@ -24,17 +24,13 @@
   },
   "navbar": {
     "links": [
-      { "label": "Support", "href": "mailto:support@notiky.com" },
-      { "label": "GitHub", "href": "https://github.com/notiky/notiky" }
+      { "label": "Support", "href": "mailto:support@notiky.com" }
     ],
     "primary": {
       "type": "button",
       "label": "Open Notiky",
       "href": "https://notiky.com"
     }
-  },
-  "footer": {
-    "socials": { "github": "https://github.com/notiky/notiky" }
   },
   "contextual": {
     "options": ["copy", "view", "chatgpt", "claude"]
@@ -103,12 +99,13 @@
             "pages": [
               "developers/setup-with-ai",
               "developers/connect-your-machine",
+              "developers/integrations",
               "cli/installation"
             ]
           },
           {
             "group": "Reference",
-            "pages": ["cli/reference", "developers/contributing"]
+            "pages": ["cli/reference", "developers/feedback"]
           }
         ]
       },

@@ -27,6 +27,10 @@ FORBIDDEN_PATTERNS=(
   'notiky-brain'
   'INVESTOR_PAGE_KEY'
   'NOTIKY_ENCRYPTION_KEY'
+  'github\.com/notiky/notiky'
+  'never publish'
+  'founder gate'
+  'DO NOT PUBLISH'
 )
 
 SECRET_PATTERNS=(
@@ -50,6 +54,18 @@ for pat in "${FORBIDDEN_PATTERNS[@]}"; do
     if [[ -n "$matches" ]]; then
       echo ""
       echo "check-public-docs: forbidden pattern '$pat':"
+      echo "$matches"
+      FAIL=1
+    fi
+  fi
+done
+
+# README is visible on GitHub — same internal guardrails as published pages.
+for pat in 'docs-private' 'data-room' 'github\.com/notiky/notiky' 'never publish' 'founder gate' 'DO NOT PUBLISH'; do
+  if matches=$(rg -n "$pat" README.md 2>/dev/null || true); then
+    if [[ -n "$matches" ]]; then
+      echo ""
+      echo "check-public-docs: forbidden pattern '$pat' in README.md:"
       echo "$matches"
       FAIL=1
     fi
@@ -83,14 +99,15 @@ while IFS= read -r -d '' file; do
   rel="${file#"$ROOT/"}"
   rel="${rel#./}"
   case "$rel" in
-    *.mdx|docs.json|README.md|SSOT.md|RESEARCH-BLOG-PIPELINE.md|AUDIT*.md|ACCURACY-MATRIX.md|ASSETS.md|SHOTS.md|research/README.md|research-tab.future.json|logo/*|images/*|favicon.*|style.css|.gitignore|scripts/check-public-docs.sh|scripts/verify-docs-accuracy.sh|.github/workflows/*) ;;
+    .internal/*) ;;
+    *.mdx|docs.json|README.md|logo/*|images/*|favicon.*|style.css|.gitignore|scripts/check-public-docs.sh|scripts/verify-docs-accuracy.sh|.github/workflows/*) ;;
     .gitkeep) ;;
     *)
       echo "check-public-docs: disallowed file in publish folder: $rel"
       FAIL=1
       ;;
   esac
-done < <(find "$PUBLIC_DOCS_DIR" -type f ! -path '*/.git/*' ! -path '*/.cursor/*' ! -path '*/scripts/*' -print0)
+done < <(find "$PUBLIC_DOCS_DIR" -type f ! -path '*/.git/*' ! -path '*/.cursor/*' ! -path '*/scripts/*' ! -path '*/.internal/*' -print0)
 
 if [[ "$FAIL" -ne 0 ]]; then
   echo ""

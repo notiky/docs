@@ -1,0 +1,90 @@
+---
+title: Integrations
+description: Connect Notiky to your machine, coding agents, and workspace tools.
+---
+
+Notiky meets you where you work — on the board, in your terminal, and inside your IDE.
+
+---
+
+## Available today
+
+### CLI and daemon
+
+The [Notiky CLI](/cli/installation) connects your machine as a **runtime**. The daemon picks up agent-assigned tasks and streams progress back to the board.
+
+Start here: [Connect your machine](/developers/connect-your-machine)
+
+### Coding agent providers
+
+Notiky runs work through the agent CLIs you already use:
+
+| Provider | CLI |
+|----------|-----|
+| Claude Code | `claude` |
+| Codex | `codex` |
+| OpenCode | `opencode` |
+| Cursor Agent | `cursor-agent` |
+| Copilot | `copilot` |
+| OpenClaw | `openclaw` |
+| Hermes | `hermes` |
+| Gemini | `gemini` |
+| Pi | `pi` |
+
+Install at least one on your PATH, then run `notiky daemon restart`. See [Agents](/agents) for the full execution flow.
+
+### Workspace operations via CLI
+
+Manage workspaces, tasks, and agents from the terminal — useful for scripts and CI hooks:
+
+```bash
+notiky workspace list
+notiky task create --title "Ship onboarding copy"
+notiky task assign <task-id> --agent <agent-id>
+```
+
+Full command tree: [CLI reference](/cli/reference)
+
+### MCP (Model Context Protocol)
+
+Connect your IDE so coding agents start each session with workspace context — decisions, goals, and artifacts — and write knowledge back as they work.
+
+**Setup:**
+
+1. Open **Settings → MCP** in the Notiky web app
+2. Choose **Local IDE** or **Cloud**, pick your IDE target, and copy the install command
+3. Run `notiky mcp install --target <ide> --mode local|cloud`
+4. Click **Test connection** — it should report the `notiky.profile` tool and session resources
+
+**What agents get on connect:**
+
+- `notiky.profile` — decisions, current goal, next actions, and recent lessons in one call
+- Session resources — current artifacts and recent changes auto-loaded into the session
+
+**Capture back:** agents can add decisions, hypotheses, and insights to your [Knowledge](/knowledge) graph through MCP tools.
+
+Cloud MCP uses workspace bearer tokens under **Settings → MCP → MCP tokens**.
+
+### Third-party connectors
+
+Linear, Jira, and Notion connectors mirror external work into your workspace brain. Install and manage them from **Settings → Connectors** in the web app.
+
+---
+
+## Not documented here yet
+
+- Public REST API reference
+- Webhooks and event subscriptions
+
+For early access or integration questions, email [support@notiky.com](mailto:support@notiky.com).
+
+---
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Connect your machine" href="/developers/connect-your-machine" />
+  <Card title="CLI installation" href="/cli/installation" />
+  <Card title="Setup with AI" href="/developers/setup-with-ai" />
+  <Card title="FAQ" href="/faq" />
+</CardGroup>

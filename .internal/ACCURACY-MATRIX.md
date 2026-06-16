@@ -28,7 +28,8 @@ Page claims must match code/UI. **Media** column tracks scenario-specific screen
 | developers/connect-your-machine.mdx | CLI daemon flow | SVG runtime-flow | CLI docs | 2026-05-24 |
 | cli/installation.mdx | Install steps | Text | install scripts | 2026-05-24 |
 | cli/reference.mdx | Full command tree | Text | `cmd_*.go` | 2026-05-24 |
-| developers/contributing.mdx | Contribution guide | Text | repo conventions | 2026-05-24 |
+| developers/feedback.mdx | Help and feedback | Text | support channels | 2026-06-17 |
+| developers/integrations.mdx | CLI, MCP, connectors | Text | product + MCP setup | 2026-06-17 |
 | changelog/overview.mdx | Release notes | Text | releases | 2026-05-24 |
 
 ## Asset inventory (26 nav pages)
