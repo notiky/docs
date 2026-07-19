@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "Notiky Documentation",
-  "description": "Product guides for founders, solo-builders, and PMs — assign agents like teammates, track work on the board, go deeper when you need CLI and runtimes.",
+  "description": "Cursor for Product Management — product guides for founders, solo-builders, and PMs. Plan development, assign agents like teammates, track work on the board, go deeper when you need CLI and runtimes.",
   "theme": "mint",
   "favicon": "/favicon.svg",
   "colors": {

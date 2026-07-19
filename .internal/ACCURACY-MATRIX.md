@@ -4,12 +4,12 @@ Page claims must match code/UI. **Media** column tracks scenario-specific screen
 
 | Page | Must match | Media | Source | Verified |
 |------|------------|-------|--------|----------|
-| welcome.mdx | Product positioning, provider names | `guides/welcome-board.png` + SVG lifecycle | landing `en.ts`, `provider_catalog.go`, Playwright | 2026-05-24 |
+| welcome.mdx | Product positioning, provider names | `guides/welcome-board.png` + SVG lifecycle | landing `en.ts`, `provider_catalog.go`, Playwright | 2026-07-19 |
 | cloud-quickstart.mdx | Install URL, UI labels, providers | 3 guides PNGs (board, runtimes, new agent) | agents UI, e2e | 2026-05-24 |
 | capabilities.mdx | Feature list vs live UI | Cards only (GIF later) | routes in `apps/web` | 2026-05-24 |
-| concepts/key-concepts.mdx | User vocabulary | SVG workspace-isolation | `docs/reference/vocabulary.md` | 2026-05-24 |
+| concepts/key-concepts.mdx | User vocabulary | SVG workspace-isolation | `docs/reference/vocabulary.md` | 2026-07-19 |
 | troubleshooting.mdx | Daemon/runtime fixes | Text | daemon + settings UI | 2026-05-24 |
-| faq.mdx | Product facts, no invented pricing | Text | operator guides, notiky.com/pricing | 2026-05-24 |
+| faq.mdx | Product facts, no invented pricing | Text | operator guides, notiky.com/pricing | 2026-07-19 |
 | tasks.mdx | Board columns, assignee chips, Properties | `guides/tasks-board.png`, `guides/tasks-assign-agent.png` | `e2e/tasks.spec.ts`, `cmd_task.go` | 2026-05-24 |
 | agents.mdx | Named agents on connected runtime | `guides/agents-list.png` | `provider_catalog.go`, daemon | 2026-05-24 |
 | conversations.mdx | Ask/Think/Plan/Do mode dropdown | `guides/conversations-modes.png` | `copilot/mode/policy.go` | 2026-05-24 |
@@ -29,8 +29,8 @@ Page claims must match code/UI. **Media** column tracks scenario-specific screen
 | cli/installation.mdx | Install steps | Text | install scripts | 2026-05-24 |
 | cli/reference.mdx | Full command tree | Text | `cmd_*.go` | 2026-05-24 |
 | developers/feedback.mdx | Help and feedback | Text | support channels | 2026-06-17 |
-| developers/integrations.mdx | CLI, MCP, connectors | Text | product + MCP setup | 2026-06-17 |
-| changelog/overview.mdx | Release notes | Text | releases | 2026-05-24 |
+| developers/integrations.mdx | CLI, MCP, connectors | Text | product + MCP setup | 2026-07-19 |
+| changelog/overview.mdx | Release notes | Text | releases | 2026-07-19 |
 
 ## Asset inventory (26 nav pages)
 
